@@ -69,16 +69,17 @@
 							columns : [
 									{
 										field : 'id',
-										title : '供应商ID'
+										title : '员工ID'
 									//sortable: true
 									},
 									{
 										field : 'name',
-										title : '供应商名称'
+										title : '员工姓名'
 									},
 									{
 										field : 'personInCharge',
-										title : '负责人'
+										title : '负责人',
+										visible : false
 									},
 									{
 										field : 'tel',
@@ -86,13 +87,11 @@
 									},
 									{
 										field : 'address',
-										title : '地址',
-										visible : false
+										title : '住址'
 									},
 									{
 										field : 'email',
-										title : '电子邮件',
-										visible : false
+										title : '电子邮件'
 									},
 									{
 										field : 'operation',

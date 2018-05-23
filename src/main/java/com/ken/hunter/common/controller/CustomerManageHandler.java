@@ -8,6 +8,8 @@ import com.ken.hunter.domain.Supplier;
 import com.ken.hunter.exception.CustomerManageServiceException;
 
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -30,7 +32,8 @@ import java.util.Map;
 @RequestMapping(value = "/**/customerManage")
 @Controller
 public class CustomerManageHandler {
-
+	
+	private static Logger logger = LoggerFactory.getLogger(CustomerManageHandler.class);
     @Autowired
     private CustomerManageService customerManageService;
 
@@ -117,7 +120,7 @@ public class CustomerManageHandler {
     Map<String, Object> addCustomer(@RequestBody Customer customer) throws CustomerManageServiceException {
         // 初始化 Response
         Response responseContent = ResponseFactory.newInstance();
-
+        logger.info(customer.getName());
         // 添加记录
         String result = customerManageService.addCustomer(customer) ? Response.RESPONSE_RESULT_SUCCESS : Response.RESPONSE_RESULT_ERROR;
 

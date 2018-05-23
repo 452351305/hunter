@@ -86,13 +86,11 @@
 									},
 									{
 										field : 'address',
-										title : '地址',
-										visible : false
+										title : '地址'
 									},
 									{
 										field : 'email',
-										title : '电子邮件',
-										visible : false
+										title : '电子邮件'
 									},
 									{
 										field : 'operation',
@@ -580,11 +578,43 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label for="" class="control-label col-md-4 col-sm-4"> <span>负责人姓名：</span>
+								<label for="" class="control-label col-md-4 col-sm-4"> <span>电子邮件：</span>
+								</label>
+								<div class="col-md-8 col-sm-8">
+									<input type="text" class="form-control" id="customer_email"
+										name="customer_email" placeholder="电子邮件">
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="" class="control-label col-md-4 col-sm-4"> <span>所属行业：</span>
+								</label>
+								<div class="col-md-8 col-sm-8">
+									<input type="text" class="form-control" id="customer_industry"
+										name="customer_industry" placeholder="所属行业">
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="" class="control-label col-md-4 col-sm-4"> <span>企业规模：</span>
+								</label>
+								<div class="col-md-8 col-sm-8">
+									<input type="text" class="form-control" id="customer_enterprisescale"
+										name="customer_enterprisescale" placeholder="企业规模">
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="" class="control-label col-md-4 col-sm-4"> <span>办公地点：</span>
+								</label>
+								<div class="col-md-8 col-sm-8">
+									<input type="text" class="form-control" id="customer_address"
+										name="customer_address" placeholder="办公地点">
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="" class="control-label col-md-4 col-sm-4"> <span>对接人：</span>
 								</label>
 								<div class="col-md-8 col-sm-8">
 									<input type="text" class="form-control" id="customer_person"
-										name="customer_person" placeholder="负责人姓名">
+										name="customer_person" placeholder="对接人">
 								</div>
 							</div>
 							<div class="form-group">
@@ -596,19 +626,28 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label for="" class="control-label col-md-4 col-sm-4"> <span>电子邮件：</span>
+								<label for="" class="control-label col-md-4 col-sm-4"> <span>沟通人：</span>
 								</label>
 								<div class="col-md-8 col-sm-8">
-									<input type="text" class="form-control" id="customer_email"
-										name="customer_email" placeholder="电子邮件">
+									<input type="text" class="form-control" id="customer_communicater"
+										name="customer_communicater" placeholder="沟通人">
 								</div>
 							</div>
 							<div class="form-group">
-								<label for="" class="control-label col-md-4 col-sm-4"> <span>联系地址：</span>
+								<label for="" class="control-label col-md-4 col-sm-4"> <span>沟通时间：</span>
 								</label>
 								<div class="col-md-8 col-sm-8">
-									<input type="text" class="form-control" id="customer_address"
-										name="customer_address" placeholder="联系地址">
+									<input type="text" class="form-control" id="customer_communicatetime"
+										name="customer_communicatetime" placeholder="沟通时间">
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="" class="control-label col-md-4 col-sm-4"> <span>沟通结果：</span>
+								</label>
+								<div class="col-md-8 col-sm-8">
+									<textarea class="form-control" id="customer_communicateresults"
+										name="customer_communicateresults" placeholder="沟通结果">
+									</textarea>
 								</div>
 							</div>
 						</form>

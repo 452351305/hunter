@@ -1,5 +1,6 @@
 package com.ken.hunter.domain;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,9 +10,11 @@ import java.util.List;
  * @author ken
  * @since 2017/2/26.
  */
-public class UserInfoDTO {
+public class UserInfoDTO implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
 
-    /**
+	/**
      * 用户ID
      */
     private Integer userID;

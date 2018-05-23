@@ -5,7 +5,7 @@ pageEncoding="UTF-8"%>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>仓库管理系统</title>
+    <title>猎才网管理系统</title>
     <link rel="stylesheet" type="text/css"
           href="${pageContext.request.contextPath}/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css"
@@ -29,7 +29,7 @@ pageEncoding="UTF-8"%>
         <div class="container-fluid">
             <!-- 导航栏标题 -->
             <div class="navbar-header">
-                <a href="javascript:void(0)" class="navbar-brand home">仓库管理系统</a>
+                <a href="javascript:void(0)" class="navbar-brand home">猎才网管理系统</a>
             </div>
 
             <!-- 导航栏下拉菜单；用户信息与注销登陆 -->
@@ -71,30 +71,30 @@ pageEncoding="UTF-8"%>
                     <div class="panel-heading">
                         <h4 class="panel-title">
                             <a href="#collapse1" data-toggle="collapse" data-parent="#accordion"
-                               class="parentMenuTitle collapseHead">库存管理</a>
+                               class="parentMenuTitle collapseHead">人才管理</a>
                             <div class="pull-right">
                                 <span class="caret"></span>
                             </div>
                         </h4>
                     </div>
-                    <div id="collapse1" class="panel-collapse collapse collapseBody">
+                    <div id="collapse1" class="panel-collapse collapse collapseBody in">
                         <div class="panel-body">
                             <ul class="list-group">
                                 <shiro:hasRole name="commonsAdmin">
                                     <li class="list-group-item">
                                         <a href="javascript:void(0)" id="" class="menu_item"
-                                           name="pagecomponent/storageManagementCommon.jsp">库存查询</a>
+                                           name="pagecomponent/storageManagementCommon.jsp">人才查询</a>
                                     </li>
                                 </shiro:hasRole>
                                 <shiro:hasRole name="systemAdmin">
                                     <li class="list-group-item">
                                         <a href="javascript:void(0)" id="" class="menu_item"
-                                           name="pagecomponent/storageManagement.jsp">库存查询</a>
+                                           name="pagecomponent/storageManagement.jsp">人才查询</a>
                                     </li>
                                     <li class="list-group-item">
                                         <a href="javascript:void(0)" id=""
                                            class="menu_item"
-                                           name="pagecomponent/stockRecordManagement.jsp">出入库记录</a>
+                                           name="pagecomponent/stockRecordManagement.jsp">入(离)职记录</a>
                                     </li>
                                 </shiro:hasRole>
                             </ul>
@@ -105,13 +105,13 @@ pageEncoding="UTF-8"%>
                     <div class="panel-heading">
                         <h4 class="panel-title">
                             <a href="#collapse2" data-toggle="collapse" data-parent="#accordion"
-                               class="parentMenuTitle collapseHead">出入库管理</a>
+                               class="parentMenuTitle collapseHead">入(离)职管理</a>
                             <div class="pull-right">
                                 <span class="caret"></span>
                             </div>
                         </h4>
                     </div>
-                    <div id="collapse2" class="panel-collapse collapse collapseBody in">
+                    <div id="collapse2" class="panel-collapse collapse collapseBody">
                         <div class="panel-body">
                             <shiro:hasRole name="systemAdmin">
                                 <ul class="list-group">
@@ -145,7 +145,7 @@ pageEncoding="UTF-8"%>
                         <div class="panel-heading">
                             <h4 class="panel-title">
                                 <a href="#collapse3" data-toggle="collapse" data-parent="#accordion"
-                                   class="parentMenuTitle collapseHead">人员管理</a>
+                                   class="parentMenuTitle collapseHead">账号管理</a>
                                 <div class="pull-right	">
                                     <span class="caret"></span>
                                 </div>
@@ -156,7 +156,7 @@ pageEncoding="UTF-8"%>
                                 <ul class="list-group">
                                     <li class="list-group-item">
                                         <a href="javascript:void(0)" id="" class="menu_item"
-                                           name="pagecomponent/repositoryAdminManagement.jsp">仓库管理员管理</a>
+                                           name="pagecomponent/repositoryAdminManagement.jsp">登录账号管理</a>
                                     </li>
                                 </ul>
                             </div>
@@ -179,7 +179,7 @@ pageEncoding="UTF-8"%>
                                 <ul class="list-group">
                                     <li class="list-group-item">
                                         <a href="javascript:void(0)" id="" class="menu_item"
-                                           name="pagecomponent/supplierManagement.jsp">供应商信息管理</a>
+                                           name="pagecomponent/supplierManagement.jsp">员工信息管理</a>
                                     </li>
                                     <li class="list-group-item">
                                         <a href="javascript:void(0)" id="" class="menu_item"
@@ -187,7 +187,7 @@ pageEncoding="UTF-8"%>
                                     </li>
                                     <li class="list-group-item">
                                         <a href="javascript:void(0)" id="" class="menu_item"
-                                           name="pagecomponent/goodsManagement.jsp">货物信息管理</a>
+                                           name="pagecomponent/goodsManagement.jsp">职位需求管理</a>
                                     </li>
                                     <li class="list-group-item">
                                         <a href="javascript:void(0)" id="" class="menu_item"
@@ -247,28 +247,28 @@ pageEncoding="UTF-8"%>
                         <div class="col-md-10" style="text-align: center">
                             <div class="col-md-4 col-sm-4">
                                 <a href="javascript:void(0)" class="thumbnail shortcut"> <img
-                                        src="media/icons/stock_search-512.png" alt="库存查询"
+                                        src="media/icons/stock_search-512.png" alt="人才查询"
                                         class="img-rounded link" style="width: 150px; height: 150px;">
                                     <div class="caption">
-                                        <h3 class="title">库存查询</h3>
+                                        <h3 class="title">人才查询</h3>
                                     </div>
                                 </a>
                             </div>
                             <div class="col-md-4 col-sm-4">
                                 <a href="javascript:void(0)" class="thumbnail shortcut"> <img
-                                        src="media/icons/stock_in-512.png" alt="货物入库"
+                                        src="media/icons/stock_in-512.png" alt="人才入职"
                                         class="img-rounded link" style="width: 150px; height: 150px;">
                                     <div class="caption">
-                                        <h3 class="title">货物入库</h3>
+                                        <h3 class="title">人才入职</h3>
                                     </div>
                                 </a>
                             </div>
                             <div class="col-md-4 col-sm-4">
                                 <a href="javascript:void(0)" class="thumbnail shortcut"> <img
-                                        src="media/icons/stock_out-512.png" alt="货物出库"
+                                        src="media/icons/stock_out-512.png" alt="人才离职"
                                         class="img-rounded link" style="width: 150px; height: 150px;">
                                     <div class="caption">
-                                        <h3 class="title">货物出库</h3>
+                                        <h3 class="title">人才离职</h3>
                                     </div>
                                 </a>
                             </div>
