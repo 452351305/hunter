@@ -7,6 +7,8 @@ import com.ken.hunter.domain.Customer;
 import com.ken.hunter.domain.Supplier;
 import com.ken.hunter.exception.CustomerManageServiceException;
 
+import net.sf.json.JSONObject;
+
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,6 +23,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.net.URLDecoder;
 import java.util.List;
 import java.util.Map;
 
@@ -281,5 +284,16 @@ public class CustomerManageHandler {
             outputStream.close();
 
         }
+    }
+    
+    //简历解析
+    @RequestMapping(value = "test", method = RequestMethod.POST)
+    @ResponseBody
+    public int test(@RequestBody String html){
+        // 初始化 Response
+    	String jsonStr = URLDecoder.decode(html);
+    	JSONObject object = JSONObject.fromObject(jsonStr.substring(5, jsonStr.length()));
+        System.out.println(object.toString());
+        return 0;
     }
 }
