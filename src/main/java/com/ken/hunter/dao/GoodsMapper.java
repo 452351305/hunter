@@ -1,6 +1,7 @@
 package com.ken.hunter.dao;
 
 
+import com.ken.hunter.domain.Customer;
 import com.ken.hunter.domain.Goods;
 
 import java.util.List;
@@ -17,6 +18,7 @@ public interface GoodsMapper {
 	 * @return 返回所有的Goods
 	 */
 	List<Goods> selectAll();
+	List<Goods> selectCustomerList();
 	
 	/**
 	 * 选择指定 id 的 Goods
@@ -24,6 +26,7 @@ public interface GoodsMapper {
 	 * @return 返回执行ID对应的Goods
 	 */
 	Goods selectById(Integer id);
+	Goods selectByCustomerId(Integer customerId);
 	
 	/**
 	 * 选择指定 Goods name 的 Goods
@@ -31,6 +34,7 @@ public interface GoodsMapper {
 	 * @return 返回指定GoodsName对应的货物
 	 */
 	Goods selectByName(String goodsName);
+	Goods selectByCustomerName(String goodsCustomerName);
 	
 	/**
 	 * 选择制定 goods name 的 goods
@@ -70,4 +74,6 @@ public interface GoodsMapper {
 	 * @param goodsName 货物的名称
 	 */
 	void deleteByName(String goodsName);
+	
+	
 }

@@ -177,19 +177,19 @@ public class RepositoryAdminManageServiceImpl implements RepositoryAdminManageSe
     }
 
     /**
-     * 添加仓库管理员信息
+     * 添加猎头信息
      *
-     * @param repositoryAdmin 仓库管理员信息
+     * @param repositoryAdmin 猎头
      * @return 返回一个boolean值，值为true代表添加成功，否则代表失败
      */
-    @UserOperation(value = "添加仓库管理员信息")
+    @UserOperation(value = "添加猎头信息")
     @Override
     public boolean addRepositoryAdmin(RepositoryAdmin repositoryAdmin) throws RepositoryAdminManageServiceException {
 
         if (repositoryAdmin != null) {
             if (repositoryAdminCheck(repositoryAdmin)) {
                 try {
-                    // 添加仓库管理员信息到数据库中
+                    // 添加猎头到数据库中
                     repositoryAdminMapper.insert(repositoryAdmin);
 
                     // 获取插入数据后返回的用户ID
@@ -200,7 +200,7 @@ public class RepositoryAdminManageServiceImpl implements RepositoryAdminManageSe
                     // 为仓库管理员创建账户
                     UserInfoDTO userInfo = new UserInfoDTO();
                     userInfo.setUserID(userID);
-                    userInfo.setUserName(repositoryAdmin.getName());
+                    userInfo.setUserName("无名氏"+userID);
                     userInfo.setPassword(repositoryAdmin.getId().toString());
                     userInfo.setRole(new ArrayList<>(Collections.singletonList("commonsAdmin")));
 
@@ -216,12 +216,12 @@ public class RepositoryAdminManageServiceImpl implements RepositoryAdminManageSe
     }
 
     /**
-     * 更新仓库管理员信息
+     * 更新猎头
      *
-     * @param repositoryAdmin 仓库管理员信息
+     * @param repositoryAdmin 猎头
      * @return 返回一个boolean值，值为true代表更新成功，否则代表失败
      */
-    @UserOperation(value = "修改仓库管理员信息")
+    @UserOperation(value = "修改猎头")
     @Override
     public boolean updateRepositoryAdmin(RepositoryAdmin repositoryAdmin) throws RepositoryAdminManageServiceException {
 
@@ -251,12 +251,12 @@ public class RepositoryAdminManageServiceImpl implements RepositoryAdminManageSe
     }
 
     /**
-     * 删除仓库管理员信息
+     * 删除猎头
      *
      * @param repositoryAdminID 仓库管理员ID
      * @return 返回一个boolean值，值为true代表删除成功，否则代表失败
      */
-    @UserOperation(value = "删除仓库管理员信息")
+    @UserOperation(value = "删除猎头")
     @Override
     public boolean deleteRepositoryAdmin(Integer repositoryAdminID) throws RepositoryAdminManageServiceException {
 
@@ -265,7 +265,7 @@ public class RepositoryAdminManageServiceImpl implements RepositoryAdminManageSe
             RepositoryAdmin repositoryAdmin = repositoryAdminMapper.selectByID(repositoryAdminID);
             if (repositoryAdmin != null && repositoryAdmin.getRepositoryBelongID() == null) {
 
-                // 删除仓库管理员信息
+                // 删除猎头
                 repositoryAdminMapper.deleteByID(repositoryAdminID);
 
                 // 删除账户信息
@@ -303,12 +303,12 @@ public class RepositoryAdminManageServiceImpl implements RepositoryAdminManageSe
     }
 
     /**
-     * 从文件中导入仓库管理员信息
+     * 从文件中导入猎头
      *
      * @param file 导入信息的文件
      * @return 返回一个Map，其中：key为total代表导入的总记录数，key为available代表有效导入的记录数
      */
-    @UserOperation(value = "导入仓库管理员信息")
+    @UserOperation(value = "导入猎头")
     @Override
     public Map<String, Object> importRepositoryAdmin(MultipartFile file) throws RepositoryAdminManageServiceException {
         // 初始化结果集
@@ -345,12 +345,12 @@ public class RepositoryAdminManageServiceImpl implements RepositoryAdminManageSe
     }
 
     /**
-     * 导出仓库管理员信息到文件中
+     * 导出猎头到文件中
      *
      * @param repositoryAdmins 包含若干条 repository 信息的 List
      * @return Excel 文件
      */
-    @UserOperation(value = "导出仓库管理员信息")
+    @UserOperation(value = "导出猎头")
     @Override
     public File exportRepositoryAdmin(List<RepositoryAdmin> repositoryAdmins) {
         File file = null;
@@ -365,17 +365,16 @@ public class RepositoryAdminManageServiceImpl implements RepositoryAdminManageSe
     /**
      * 检验 repositoryAdmin 信息是否有效
      *
-     * @param repositoryAdmin 仓库管理员信息
-     * @return 返回一个 boolean 值，若仓库管理员信息中要求非空均有值，返回 true，否则返回 false
+     * @param repositoryAdmin 猎头
+     * @return 返回一个 boolean 值，若猎头中要求非空均有值，返回 true，否则返回 false
      */
     private boolean repositoryAdminCheck(RepositoryAdmin repositoryAdmin) {
 
-        return repositoryAdmin.getName() != null && repositoryAdmin.getSex() != null && repositoryAdmin.getTel() != null
-                && repositoryAdmin.getBirth() != null && repositoryAdmin.getBirth() != null;
+        return repositoryAdmin.getBirth() != null;
     }
 
     /**
-     * 返回所属指定 repositoryID 的仓库管理员信息
+     * 返回所属指定 repositoryID 的猎头
      *
      * @param repositoryID 仓库ID 其中： key为 data 的代表记录数据；key 为 total 代表结果记录的数量
      * @return 返回一个Map，

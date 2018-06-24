@@ -69,15 +69,15 @@
 	</select>
 	
 	<insert id="insert">
-		insert into hunter_customer(CUSTOMER_NAME,CUSTOMER_PERSON,CUSTOMER_TEL,CUSTOMER_EMAIL,CUSTOMER_ADDRESS)
-		values (#{name},#{personInCharge},#{tel},#{email},#{address})
+		insert into hunter_customer(CUSTOMER_NAME,CUSTOMER_PERSON,CUSTOMER_TEL,CUSTOMER_EMAIL,CUSTOMER_ADDRESS,CUSTOMER_INDUSTRY,CUSTOMER_ENTERPRISESCALE,CUSTOMER_COMMUNICATER,CUSTOMER_COMMUNICATETIME,CUSTOMER_COMMUNICATERESULTS)
+		values (#{name},#{personInCharge},#{tel},#{email},#{address},#{industry},#{enterprisescale},#{communicater},#{communicatetime},#{communicateresults})
 	</insert>
 	
 	<insert id="insertBatch">
-		insert into hunter_customer(CUSTOMER_NAME,CUSTOMER_PERSON,CUSTOMER_TEL,CUSTOMER_EMAIL,CUSTOMER_ADDRESS)
+		insert into hunter_customer(CUSTOMER_NAME,CUSTOMER_PERSON,CUSTOMER_TEL,CUSTOMER_EMAIL,CUSTOMER_ADDRESS,CUSTOMER_INDUSTRY,CUSTOMER_ENTERPRISESCALE,CUSTOMER_COMMUNICATER,CUSTOMER_COMMUNICATETIME,CUSTOMER_COMMUNICATERESULTS)
 		values
 		<foreach collection="list" item="customer" separator=",">
-			(#{customer.name},#{customer.personInCharge},#{customer.tel},#{customer.email},#{customer.address})
+			(#{customer.name},#{customer.personInCharge},#{customer.tel},#{customer.email},#{customer.address},#{customer.industry},#{customer.enterprisescale},#{customer.communicater},#{customer.communicatetime},#{customer.communicateresults})
 		</foreach>
 	</insert>
 	

@@ -34,7 +34,7 @@ public interface SupplierManageService {
      * @param supplierName 供应商的名称
      * @return 结果的一个Map，其中： key为 data 的代表记录数据；key 为 total 代表结果记录的数量
      */
-    Map<String, Object> selectByName(int offset, int limit, String supplierName) throws SupplierManageServiceException;
+    Map<String, Object> selectByPerson(int offset, int limit, String supplierName) throws SupplierManageServiceException;
 
     /**
      * 返回指定 supplierName 的供应商记录
@@ -43,7 +43,7 @@ public interface SupplierManageService {
      * @param supplierName supplierName 供应商名称
      * @return 结果的一个Map，其中： key为 data 的代表记录数据；key 为 total 代表结果记录的数量
      */
-    Map<String, Object> selectByName(String supplierName) throws SupplierManageServiceException;
+    Map<String, Object> selectByPerson(String supplierName) throws SupplierManageServiceException;
 
     /**
      * 分页查询供应商记录

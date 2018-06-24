@@ -30,13 +30,13 @@
 			if (type == "所有") {
 				$("#search_input_type").attr("readOnly", "true");
 				search_type_storage = "searchAll";
-			} else if (type == "货物ID") {
+			} else if (type == "人才ID") {
 				$("#search_input_type").removeAttr("readOnly");
 				search_type_storage = "searchByGoodsID";
-			} else if (type == "货物名称") {
+			} else if (type == "人才名称") {
 				$("#search_input_type").removeAttr("readOnly");
 				search_type_storage = "searchByGoodsName";
-			} else if(type = "货物类型"){
+			} else if(type = "人才类型"){
 				$("#search_input_type").removeAttr("readOnly");
 				search_type_storage = "searchByGoodsType";
 			}else {
@@ -48,7 +48,7 @@
 		})
 	}
 
-	// 仓库下拉框数据初始化
+	// 人才下拉框数据初始化
 	function repositoryOptionInit(){
 		$.ajax({
 			type : 'GET',
@@ -63,14 +63,14 @@
 			},
 			success : function(response){
 				$.each(response.rows,function(index,elem){
-					$('#search_input_repository').append("<option value='" + elem.id + "'>" + elem.id +"号仓库</option>");
+					$('#search_input_repository').append("<option value='" + elem.id + "'>" + elem.id +"号人才</option>");
 				})
 			},
 			error : function(response){
 				// do nothing
 			}
 		});
-		$('#search_input_repository').append("<option value='all'>所有仓库</option>");
+		$('#search_input_repository').append("<option value='all'>所有人才</option>");
 	}
 
 	// 搜索动作
@@ -102,34 +102,34 @@
 							columns : [
 									{
 										field : 'goodsID',
-										title : '货物ID'
+										title : '人才ID'
 									//sortable: true
 									},
 									{
 										field : 'goodsName',
-										title : '货物名称'
+										title : '人才名称'
 									},
 									{
 										field : 'goodsType',
-										title : '货物类型'
+										title : '人才类型'
 									},
 									{
 										field : 'goodsSize',
-										title : '货物尺寸',
+										title : '人才尺寸',
 										visible : false
 									},
 									{
 										field : 'goodsValue',
-										title : '货物价值',
+										title : '人才价值',
 										visible : false
 									},
 									{
 										field : 'repositoryID',
-										title : '仓库ID'
+										title : '人才ID'
 									},
 									{
 										field : 'number',
-										title : '库存数量'
+										title : '人才数量'
 									},
 									{
 										field : 'operation',
@@ -204,21 +204,21 @@
 				storage_goodsID : {
 					validators : {
 						notEmpty : {
-							message : '货物ID不能为空'
+							message : '人才ID不能为空'
 						}
 					}
 				},
 				storage_repositoryID : {
 					validators : {
 						notEmpty : {
-							message : '仓库ID不能为空'
+							message : '人才ID不能为空'
 						}
 					}
 				},
 				storage_number : {
 					validators : {
 						notEmpty : {
-							message : '库存数量不能为空'
+							message : '人才数量不能为空'
 						}
 					}
 				}
@@ -226,7 +226,7 @@
 		})
 	}
 
-	// 编辑库存信息
+	// 编辑人才信息
 	function editStorageAction() {
 		$('#edit_modal_submit').click(
 				function() {
@@ -257,10 +257,10 @@
 							var append = '';
 							if (response.result == "success") {
 								type = "success";
-								msg = "库存信息更新成功";
+								msg = "人才信息更新成功";
 							} else if (resposne == "error") {
 								type = "error";
-								msg = "库存信息更新失败"
+								msg = "人才信息更新失败"
 							}
 							shohunterg(type, msg, append);
 							tableRefresh();
@@ -274,7 +274,7 @@
 				});
 	}
 
-	// 刪除库存信息
+	// 刪除人才信息
 	function deleteStorageAction(){
 		$('#delete_confirm').click(function(){
 			var data = {
@@ -296,10 +296,10 @@
 					var append = '';
 					if(response.result == "success"){
 						type = "success";
-						msg = "库存信息删除成功";
+						msg = "人才信息删除成功";
 					}else{
 						type = "error";
-						msg = "库存信息删除失败";
+						msg = "人才信息删除失败";
 					}
 					shohunterg(type, msg, append);
 					tableRefresh();
@@ -314,10 +314,11 @@
 		})
 	}
 
-	// 添加库存信息
+	// 添加人才信息
 	function addStorageAction() {
 		$('#add_storage').click(function() {
-			$('#add_modal').modal("show");
+			/* $('#add_modal').modal("show"); */
+			window.location.href="pagecomponent/personaledit.jsp";
 		});
 
 		$('#add_modal_submit').click(function() {
@@ -340,10 +341,10 @@
 					var append = '';
 					if (response.result == "success") {
 						type = "success";
-						msg = "库存信息添加成功";
+						msg = "人才信息添加成功";
 					} else if (response.result == "error") {
 						type = "error";
-						msg = "库存信息添加失败";
+						msg = "人才信息添加失败";
 					}
 					shohunterg(type, msg, append);
 					tableRefresh();
@@ -366,7 +367,7 @@
 	var import_step = 1;
 	var import_start = 1;
 	var import_end = 3;
-	// 导入库存信息
+	// 导入人才信息
 	function importStorageAction() {
 		$('#import_storage').click(function() {
 			$('#import_modal').modal("show");
@@ -418,8 +419,8 @@
 				success : function(data, status){
 					var total = 0;
 					var available = 0;
-					var msg1 = "库存信息导入成功";
-					var msg2 = "库存信息导入失败";
+					var msg1 = "人才信息导入成功";
+					var msg2 = "人才信息导入失败";
 					var info;
 
 					$('#import_progress_bar').addClass("hide");
@@ -450,7 +451,7 @@
 		})
 	}
 
-	// 导出库存信息
+	// 导出人才信息
 	function exportStorageAction() {
 		$('#export_storage').click(function() {
 			$('#export_modal').modal("show");
@@ -468,7 +469,7 @@
 		})
 	}
 
-	// 导入库存信息模态框重置
+	// 导入人才信息模态框重置
 	function importModalReset(){
 		var i;
 		for(i = import_start; i <= import_end; i++){
@@ -511,7 +512,7 @@
 </script>
 <div class="panel panel-default">
 	<ol class="breadcrumb">
-		<li>库存信息管理</li>
+		<li>人才信息管理</li>
 	</ol>
 	<div class="panel-body">
 		<div class="row">
@@ -522,9 +523,9 @@
 						<span id="search_type">查询方式</span> <span class="caret"></span>
 					</button>
 					<ul class="dropdown-menu" role="menu">
-						<li><a href="javascript:void(0)" class="dropOption">货物ID</a></li>
-						<li><a href="javascript:void(0)" class="dropOption">货物名称</a></li>
-						<li><a href="javascript:void(0)" class="dropOption">货物类型</a></li>
+						<li><a href="javascript:void(0)" class="dropOption">人才ID</a></li>
+						<li><a href="javascript:void(0)" class="dropOption">人才名称</a></li>
+						<li><a href="javascript:void(0)" class="dropOption">人才类型</a></li>
 						<li><a href="javascript:void(0)" class="dropOption">所有</a></li>
 					</ul>
 				</div>
@@ -533,7 +534,7 @@
 				<div>
 					<div class="col-md-3 col-sm-3">
 						<input id="search_input_type" type="text" class="form-control"
-							placeholder="货物ID">
+							placeholder="人才ID">
 					</div>
 					<div class="col-md-3 col-sm-4">
 						<select class="form-control" id="search_input_repository">
@@ -551,7 +552,7 @@
 		<div class="row" style="margin-top: 25px">
 			<div class="col-md-5">
 				<button class="btn btn-sm btn-default" id="add_storage">
-					<span class="glyphicon glyphicon-plus"></span> <span>添加库存信息</span>
+					<span class="glyphicon glyphicon-plus"></span> <span>添加人才信息</span>
 				</button>
 				<button class="btn btn-sm btn-default" id="import_storage">
 					<span class="glyphicon glyphicon-import"></span> <span>导入</span>
@@ -571,7 +572,7 @@
 	</div>
 </div>
 
-<!-- 添加库存信息模态框 -->
+<!-- 添加人才信息模态框 -->
 <div id="add_modal" class="modal fade" table-index="-1" role="dialog"
 	aria-labelledby="myModalLabel" aria-hidden="true"
 	data-backdrop="static">
@@ -580,7 +581,7 @@
 			<div class="modal-header">
 				<button class="close" type="button" data-dismiss="modal"
 					aria-hidden="true">&times;</button>
-				<h4 class="modal-title" id="myModalLabel">添加库存记录</h4>
+				<h4 class="modal-title" id="myModalLabel">添加人才记录</h4>
 			</div>
 			<div class="modal-body">
 				<!-- 模态框的内容 -->
@@ -590,19 +591,19 @@
 						<form class="form-horizontal" role="form" id="storage_form"
 							style="margin-top: 25px">
 							<div class="form-group">
-								<label for="" class="control-label col-md-4 col-sm-4"> <span>货物ID：</span>
+								<label for="" class="control-label col-md-4 col-sm-4"> <span>人才ID：</span>
 								</label>
 								<div class="col-md-8 col-sm-8">
 									<input type="text" class="form-control" id="storage_goodsID"
-										name="storage_goodsID" placeholder="货物ID">
+										name="storage_goodsID" placeholder="人才ID">
 								</div>
 							</div>
 							<div class="form-group">
-								<label for="" class="control-label col-md-4 col-sm-4"> <span>仓库ID：</span>
+								<label for="" class="control-label col-md-4 col-sm-4"> <span>人才ID：</span>
 								</label>
 								<div class="col-md-8 col-sm-8">
 									<input type="text" class="form-control" id="storage_repositoryID"
-										name="storage_repositoryID" placeholder="仓库ID">
+										name="storage_repositoryID" placeholder="人才ID">
 								</div>
 							</div>
 							<div class="form-group">
@@ -630,7 +631,7 @@
 	</div>
 </div>
 
-<!-- 导入库存信息模态框 -->
+<!-- 导入人才信息模态框 -->
 <div class="modal fade" id="import_modal" table-index="-1" role="dialog"
 	aria-labelledby="myModalLabel" aria-hidden="true"
 	data-backdrop="static">
@@ -639,7 +640,7 @@
 			<div class="modal-header">
 				<button class="close" type="button" data-dismiss="modal"
 					aria-hidden="true">&times;</button>
-				<h4 class="modal-title" id="myModalLabel">导入库存信息</h4>
+				<h4 class="modal-title" id="myModalLabel">导入人才信息</h4>
 			</div>
 			<div class="modal-body">
 				<div id="step1">
@@ -647,7 +648,7 @@
 						<div class="col-md-1 col-sm-1"></div>
 						<div class="col-md-10 col-sm-10">
 							<div>
-								<h4>点击下面的下载按钮，下载库存信息电子表格</h4>
+								<h4>点击下面的下载按钮，下载人才信息电子表格</h4>
 							</div>
 							<div style="margin-top: 30px; margin-buttom: 15px">
 								<a class="btn btn-info"
@@ -664,7 +665,7 @@
 						<div class="col-md-1 col-sm-1"></div>
 						<div class="col-md-10 col-sm-10">
 							<div>
-								<h4>请按照库存信息电子表格中指定的格式填写需要添加的一个或多个库存信息</h4>
+								<h4>请按照人才信息电子表格中指定的格式填写需要添加的一个或多个人才信息</h4>
 							</div>
 							<div class="alert alert-info"
 								style="margin-top: 10px; margin-buttom: 30px">
@@ -679,7 +680,7 @@
 						<div class="col-md-8 col-sm-10">
 							<div>
 								<div>
-									<h4>请点击下面上传文件按钮，上传填写好的库存信息电子表格</h4>
+									<h4>请点击下面上传文件按钮，上传填写好的人才信息电子表格</h4>
 								</div>
 								<div style="margin-top: 30px; margin-buttom: 15px">
 									<span class="btn btn-info btn-file"> <span> <span
@@ -751,7 +752,7 @@
 	</div>
 </div>
 
-<!-- 导出库存信息模态框 -->
+<!-- 导出人才信息模态框 -->
 <div class="modal fade" id="export_modal" table-index="-1" role="dialog"
 	aria-labelledby="myModalLabel" aria-hidden="true"
 	data-backdrop="static">
@@ -760,7 +761,7 @@
 			<div class="modal-header">
 				<button class="close" type="button" data-dismiss="modal"
 					aria-hidden="true">&times;</button>
-				<h4 class="modal-title" id="myModalLabel">导出库存信息</h4>
+				<h4 class="modal-title" id="myModalLabel">导出人才信息</h4>
 			</div>
 			<div class="modal-body">
 				<div class="row">
@@ -769,8 +770,8 @@
 							style="width: 70px; height: 70px; margin-top: 20px;">
 					</div>
 					<div class="col-md-8 col-sm-8">
-						<h3>是否确认导出库存信息</h3>
-						<p>(注意：请确定要导出的库存信息，导出的内容为当前列表的搜索结果)</p>
+						<h3>是否确认导出人才信息</h3>
+						<p>(注意：请确定要导出的人才信息，导出的内容为当前列表的搜索结果)</p>
 					</div>
 				</div>
 			</div>
@@ -803,8 +804,8 @@
 							style="width: 70px; height: 70px; margin-top: 20px;">
 					</div>
 					<div class="col-md-8 col-sm-8">
-						<h3>是否确认删除该条库存信息</h3>
-						<p>(注意：一旦删除该条库存信息，将不能恢复)</p>
+						<h3>是否确认删除该条人才信息</h3>
+						<p>(注意：一旦删除该条人才信息，将不能恢复)</p>
 					</div>
 				</div>
 			</div>
@@ -820,7 +821,7 @@
 	</div>
 </div>
 
-<!-- 编辑库存模态框 -->
+<!-- 编辑人才模态框 -->
 <div id="edit_modal" class="modal fade" table-index="-1" role="dialog"
 	aria-labelledby="myModalLabel" aria-hidden="true"
 	data-backdrop="static">
@@ -829,7 +830,7 @@
 			<div class="modal-header">
 				<button class="close" type="button" data-dismiss="modal"
 					aria-hidden="true">&times;</button>
-				<h4 class="modal-title" id="myModalLabel">编辑货物信息</h4>
+				<h4 class="modal-title" id="myModalLabel">编辑人才信息</h4>
 			</div>
 			<div class="modal-body">
 				<!-- 模态框的内容 -->
@@ -839,14 +840,14 @@
 						<form class="form-horizontal" role="form" id="storage_form_edit"
 							style="margin-top: 25px">
 							<div class="form-group">
-								<label for="" class="control-label col-md-4 col-sm-4"> <span>货物ID：</span>
+								<label for="" class="control-label col-md-4 col-sm-4"> <span>人才ID：</span>
 								</label>
 								<div class="col-md-4 col-sm-4">
 									<p id="storage_goodsID_edit" class="form-control-static"></p>
 								</div>
 							</div>
 							<div class="form-group">
-								<label for="" class="control-label col-md-4 col-sm-4"> <span>仓库ID：</span>
+								<label for="" class="control-label col-md-4 col-sm-4"> <span>人才ID：</span>
 								</label>
 								<div class="col-md-4 col-sm-4">
 									<p id="storage_repositoryID_edit" class="form-control-static"></p>
@@ -857,7 +858,7 @@
 								</label>
 								<div class="col-md-8 col-sm-8">
 									<input type="text" class="form-control" id="storage_number_edit"
-										name="storage_number" placeholder="库存数量">
+										name="storage_number" placeholder="人才数量">
 								</div>
 							</div>
 						</form>

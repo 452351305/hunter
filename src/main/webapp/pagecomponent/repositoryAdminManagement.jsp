@@ -28,10 +28,10 @@
 			if (type == "所有") {
 				$("#search_input").attr("readOnly", "true");
 				search_type_repositoryAdmin = "searchAll";
-			} else if (type == "仓库管理员ID") {
+			} else if (type == "猎头ID") {
 				$("#search_input").removeAttr("readOnly");
 				search_type_repositoryAdmin = "searchByID";
-			} else if (type == "仓库管理员姓名") {
+			} else if (type == "猎头姓名") {
 				$("#search_input").removeAttr("readOnly");
 				search_type_repositoryAdmin = "searchByName";
 			}else if(type == "仓库ID"){
@@ -73,12 +73,12 @@
 							columns : [
 									{
 										field : 'id',
-										title : '仓库管理员ID'
+										title : '猎头ID'
 									//sortable: true
 									},
 									{
 										field : 'name',
-										title : '仓库管理员姓名'
+										title : '猎头姓名'
 									},
 									{
 										field : 'sex',
@@ -101,7 +101,7 @@
 									},
 									{
 										field : "repositoryBelongID",
-										title : "所属仓库ID"
+										title : "关联员工ID"
 									},
 									{
 										field : 'operation',
@@ -166,7 +166,7 @@
 		
 		// 加载未分配仓库信息
 		if(row.repositoryBelongID != null){
-			$('#repositoryAdmin_repoID_edit').append("<option value='" + row.repositoryBelongID + "'>" + row.repositoryBelongID + "</option>");
+			$('#repositoryAdmin_repoID_edit').append("<option value='" + row.repositoryBelongID + "'>" + row.name + "</option>");
 		}
 			$('#repositoryAdmin_repoID_edit').append("<option value=''>不指派</option>");
 		
@@ -180,7 +180,7 @@
 				data = response.data;
 				unassignRepoCache = data;
 				$.each(data,function(index,element){
-					$('#repositoryAdmin_repoID_edit').append("<option value='" + element.id + "'>" + element.id + "</option>");
+					$('#repositoryAdmin_repoID_edit').append("<option value='" + element.id + "'>" + element.personInCharge + "</option>");
 				})
 			}
 		});
@@ -213,31 +213,10 @@
 			},
 			excluded : [ ':disabled' ],
 			fields : {
-				repositoryAdmin_name : {
-					validators : {
-						notEmpty : {
-							message : '仓库管理员姓名不能为空'
-						}
-					}
-				},
-				repositoryAdmin_tel : {
-					validators : {
-						notEmpty : {
-							message : '仓库管理员联系电话不能为空'
-						}
-					}
-				},
-				repositoryAdmin_address : {
-					validators : {
-						notEmpty : {
-							message : '仓库管理员联系地址不能为空'
-						}
-					}
-				},
 				repositoryAdmin_birth : {
 					validators : {
 						notEmpty : {
-							message : '仓库管理员出身日期不能为空'
+							message : '猎头出身日期不能为空'
 						}
 					}
 				}
@@ -246,7 +225,7 @@
 		})
 	}
 
-	// 编辑仓库管理员信息
+	// 编辑猎头信息
 	function editRepositoryAdminAction() {
 		$('#edit_modal_submit').click(
 				function() {
@@ -281,10 +260,10 @@
 							var append = '';
 							if (response.result == "success") {
 								type = "success";
-								msg = "仓库管理员信息更新成功";
+								msg = "猎头信息更新成功";
 							} else if (resposne == "error") {
 								type = "error";
-								msg = "仓库管理员信息更新失败"
+								msg = "猎头信息更新失败"
 							}
 							shohunterg(type, msg, append);
 							tableRefresh();
@@ -302,9 +281,10 @@
 			$('#repositoryInfo').removeClass('hide').addClass('hide');
 			$.each(unassignRepoCache,function(index,element){
 				if(element.id == repositoryID){
+					$('#repository_status').text("正常");
+					$('#repository_name').text(element.personInCharge);
+					$('#repository_sex').text(element.sex);
 					$('#repository_address').text(element.address);
-					$('#repository_area').text(element.area);
-					$('#repository_status').text(element.status);
 					$('#repositoryInfo').removeClass('hide');
 				}
 			})
@@ -312,7 +292,7 @@
 		})
 	}
 
-	// 刪除仓库管理员信息
+	// 刪除猎头信息
 	function deleteRepositoryAdminAction(){
 		$('#delete_confirm').click(function(){
 			var data = {
@@ -333,10 +313,10 @@
 					var append = '';
 					if(response.result == "success"){
 						type = "success";
-						msg = "仓库管理员信息删除成功";
+						msg = "猎头信息删除成功";
 					}else{
 						type = "error";
-						msg = "仓库管理员信息删除失败";
+						msg = "猎头信息删除失败";
 					}
 					shohunterg(type, msg, append);
 					tableRefresh();
@@ -351,7 +331,7 @@
 		})
 	}
 
-	// 添加仓库管理员信息
+	// 添加猎头信息
 	function addRepositoryAdminAction() {
 		$('#add_repositoryAdmin').click(function() {
 			$('#add_modal').modal("show");
@@ -359,10 +339,6 @@
 
 		$('#add_modal_submit').click(function() {
 			var data = {
-				name : $('#repositoryAdmin_name').val(),
-				tel : $('#repositoryAdmin_tel').val(),
-				sex : $('#repositoryAdmin_sex').val(),
-				address : $('#repositoryAdmin_address').val(),
 				birth : $('#repositoryAdmin_birth').val()
 			}
 			// ajax
@@ -379,20 +355,16 @@
 					var append = '';
 					if (response.result == "success") {
 						type = "success";
-						msg = "仓库管理员添加成功";
-						append = '注意：仓库管理员的系统初始密码为该ID';
+						msg = "猎头添加成功";
+						append = '注意：猎头的系统初始密码为该ID';
 					} else if (response.result == "error") {
 						type = "error";
-						msg = "仓库管理员添加失败";
+						msg = "猎头添加失败";
 					}
 					shohunterg(type, msg, append);
 					tableRefresh();
 
 					// reset
-					$('#repositoryAdmin_name').val("");
-					$('#repositoryAdmin_sex').val("男");
-					$('#repositoryAdmin_tel').val("");
-					$('#repositoryAdmin_address').val("");
 					$('#repositoryAdmin_birth').val("");
 					$('#repositoryAdmin_form').bootstrapValidator("resetForm", true);
 				},
@@ -408,7 +380,7 @@
 	var import_step = 1;
 	var import_start = 1;
 	var import_end = 3;
-	// 导入仓库管理员信息
+	// 导入猎头信息
 	function importRepositoryAdminAction() {
 		$('#import_repositoryAdmin').click(function() {
 			$('#import_modal').modal("show");
@@ -460,8 +432,8 @@
 				success : function(data, status){
 					var total = 0;
 					var available = 0;
-					var msg1 = "仓库管理员信息导入成功";
-					var msg2 = "仓库管理员信息导入失败";
+					var msg1 = "猎头信息导入成功";
+					var msg2 = "猎头信息导入失败";
 					var info;
 
 					$('#import_progress_bar').addClass("hide");
@@ -491,7 +463,7 @@
 		})
 	}
 
-	// 导出仓库管理员信息
+	// 导出猎头信息
 	function exportRepositoryAdminAction() {
 		$('#export_repositoryAdmin').click(function() {
 			$('#export_modal').modal("show");
@@ -508,7 +480,7 @@
 		})
 	}
 
-	// 导入仓库管理员模态框重置
+	// 导入猎头模态框重置
 	function importModalReset(){
 		var i;
 		for(i = import_start; i <= import_end; i++){
@@ -551,7 +523,7 @@
 </script>
 <div class="panel panel-default">
 	<ol class="breadcrumb">
-		<li>仓库管理员信息管理</li>
+		<li>猎头信息管理</li>
 	</ol>
 	<div class="panel-body">
 		<div class="row">
@@ -564,8 +536,8 @@
 								<span id="search_type">查询方式</span> <span class="caret"></span>
 							</button>
 							<ul class="dropdown-menu" role="menu">
-								<li><a href="javascript:void(0)" class="dropOption">仓库管理员ID</a></li>
-								<li><a href="javascript:void(0)" class="dropOption">仓库管理员姓名</a></li>
+								<li><a href="javascript:void(0)" class="dropOption">猎头ID</a></li>
+								<li><a href="javascript:void(0)" class="dropOption">猎头姓名</a></li>
 								<li><a href="javascript:void(0)" class="dropOption">仓库ID</a></li>
 								<li><a href="javascript:void(0)" class="dropOption">所有</a></li>
 							</ul>
@@ -575,7 +547,7 @@
 						<div>
 							<div class="col-md-5 col-sm-7">
 								<input id="search_input" type="text" class="form-control"
-									placeholder="查询仓库管理员信息">
+									placeholder="查询猎头信息">
 							</div>
 							<div class="col-md-2 col-sm-5">
 								<button id="search_button" class="btn btn-success">
@@ -591,7 +563,7 @@
 		<div class="row" style="margin-top: 25px">
 			<div class="col-md-5">
 				<button class="btn btn-sm btn-default" id="add_repositoryAdmin">
-					<span class="glyphicon glyphicon-plus"></span> <span>添加仓库管理员信息</span>
+					<span class="glyphicon glyphicon-plus"></span> <span>添加猎头信息</span>
 				</button>
 				<button class="btn btn-sm btn-default" id="import_repositoryAdmin">
 					<span class="glyphicon glyphicon-import"></span> <span>导入</span>
@@ -611,7 +583,7 @@
 	</div>
 </div>
 
-<!-- 添加仓库管理员信息模态框 -->
+<!-- 添加猎头信息模态框 -->
 <div id="add_modal" class="modal fade" table-index="-1" role="dialog"
 	aria-labelledby="myModalLabel" aria-hidden="true"
 	data-backdrop="static">
@@ -620,7 +592,7 @@
 			<div class="modal-header">
 				<button class="close" type="button" data-dismiss="modal"
 					aria-hidden="true">&times;</button>
-				<h4 class="modal-title" id="myModalLabel">添加仓库管理员信息</h4>
+				<h4 class="modal-title" id="myModalLabel">添加猎头信息</h4>
 			</div>
 			<div class="modal-body">
 				<!-- 模态框的内容 -->
@@ -629,40 +601,6 @@
 					<div class="col-md-8 col-sm-8">
 						<form class="form-horizontal" role="form" id="repositoryAdmin_form"
 							style="margin-top: 25px">
-							<div class="form-group">
-								<label for="" class="control-label col-md-5 col-sm-5"> <span>仓库管理员姓名：</span>
-								</label>
-								<div class="col-md-7 col-sm-7">
-									<input type="text" class="form-control" id="repositoryAdmin_name"
-										name="repositoryAdmin_name" placeholder="仓库管理员姓名">
-								</div>
-							</div>
-							<div class="form-group">
-								<label for="" class="control-label col-md-5 col-sm-5"> <span>仓库管理员性别:</span>
-								</label>
-								<div class="col-md-5 col-sm-5">
-									<select name="" class="form-control" id="repositoryAdmin_sex">
-										<option value="男">男性</option>
-										<option value="女">女性</option>
-									</select>
-								</div>
-							</div>
-							<div class="form-group">
-								<label for="" class="control-label col-md-5 col-sm-5"> <span>联系电话：</span>
-								</label>
-								<div class="col-md-7 col-sm-7">
-									<input type="text" class="form-control" id="repositoryAdmin_tel"
-										name="repositoryAdmin_tel" placeholder="联系电话">
-								</div>
-							</div>
-							<div class="form-group">
-								<label for="" class="control-label col-md-5 col-sm-5"> <span>联系地址：</span>
-								</label>
-								<div class="col-md-7 col-sm-7">
-									<input type="text" class="form-control" id="repositoryAdmin_address"
-										name="repositoryAdmin_address" placeholder="联系地址">
-								</div>
-							</div>
 							<div class="form-group">
 								<label for="BirthDate" class="control-label col-md-5 col-sm-5"> 
 									<span>出生日期:</span>
@@ -688,7 +626,7 @@
 	</div>
 </div>
 
-<!-- 导入仓库管理员信息模态框 -->
+<!-- 导入猎头信息模态框 -->
 <div class="modal fade" id="import_modal" table-index="-1" role="dialog"
 	aria-labelledby="myModalLabel" aria-hidden="true"
 	data-backdrop="static">
@@ -697,7 +635,7 @@
 			<div class="modal-header">
 				<button class="close" type="button" data-dismiss="modal"
 					aria-hidden="true">&times;</button>
-				<h4 class="modal-title" id="myModalLabel">导入仓库管理员信息</h4>
+				<h4 class="modal-title" id="myModalLabel">导入猎头信息</h4>
 			</div>
 			<div class="modal-body">
 				<div id="step1">
@@ -705,7 +643,7 @@
 						<div class="col-md-1 col-sm-1"></div>
 						<div class="col-md-10 col-sm-10">
 							<div>
-								<h4>点击下面的下载按钮，下载仓库管理员信息电子表格</h4>
+								<h4>点击下面的下载按钮，下载猎头信息电子表格</h4>
 							</div>
 							<div style="margin-top: 30px; margin-buttom: 15px">
 								<a class="btn btn-info"
@@ -722,7 +660,7 @@
 						<div class="col-md-1 col-sm-1"></div>
 						<div class="col-md-10 col-sm-10">
 							<div>
-								<h4>请按照仓库管理员信息电子表格中指定的格式填写需要添加的一个或多个仓库管理员信息</h4>
+								<h4>请按照猎头信息电子表格中指定的格式填写需要添加的一个或多个猎头信息</h4>
 							</div>
 							<div class="alert alert-info"
 								style="margin-top: 10px; margin-buttom: 30px">
@@ -737,7 +675,7 @@
 						<div class="col-md-8 col-sm-10">
 							<div>
 								<div>
-									<h4>请点击下面上传文件按钮，上传填写好的仓库管理员信息电子表格</h4>
+									<h4>请点击下面上传文件按钮，上传填写好的猎头信息电子表格</h4>
 								</div>
 								<div style="margin-top: 30px; margin-buttom: 15px">
 									<span class="btn btn-info btn-file"> <span> <span
@@ -814,7 +752,7 @@
 	</div>
 </div>
 
-<!-- 导出仓库管理员信息模态框 -->
+<!-- 导出猎头信息模态框 -->
 <div class="modal fade" id="export_modal" table-index="-1" role="dialog"
 	aria-labelledby="myModalLabel" aria-hidden="true"
 	data-backdrop="static">
@@ -832,8 +770,8 @@
 							style="width: 70px; height: 70px; margin-top: 20px;">
 					</div>
 					<div class="col-md-8 col-sm-8">
-						<h3>是否确认导出仓库管理员信息</h3>
-						<p>(注意：请确定要导出的仓库管理员信息，导出的内容为当前列表的搜索结果)</p>
+						<h3>是否确认导出猎头信息</h3>
+						<p>(注意：请确定要导出的猎头信息，导出的内容为当前列表的搜索结果)</p>
 					</div>
 				</div>
 			</div>
@@ -866,8 +804,8 @@
 							style="width: 70px; height: 70px; margin-top: 20px;">
 					</div>
 					<div class="col-md-8 col-sm-8">
-						<h3>是否确认删除该条仓库管理员信息</h3>
-						<p>(注意：若该仓库管理员已经指派管理的仓库，则该仓库管理员信息将不能删除成功。如需删除该客户的信息，请先解除该仓库管理员的指派)</p>
+						<h3>是否确认删除该条猎头信息</h3>
+						<p>(注意：若该猎头账号已经关联某个员工，则该猎头信息将不能删除成功。如需删除该猎头账号的信息，请先解除该猎头的员工关联)</p>
 					</div>
 				</div>
 			</div>
@@ -883,7 +821,7 @@
 	</div>
 </div>
 
-<!-- 编辑仓库管理员信息模态框 -->
+<!-- 编辑猎头信息模态框 -->
 <div id="edit_modal" class="modal fade" table-index="-1" role="dialog"
 	aria-labelledby="myModalLabel" aria-hidden="true"
 	data-backdrop="static">
@@ -892,7 +830,7 @@
 			<div class="modal-header">
 				<button class="close" type="button" data-dismiss="modal"
 					aria-hidden="true">&times;</button>
-				<h4 class="modal-title" id="myModalLabel">编辑仓库管理员信息</h4>
+				<h4 class="modal-title" id="myModalLabel">编辑猎头信息</h4>
 			</div>
 			<div class="modal-body">
 				<!-- 模态框的内容 -->
@@ -902,15 +840,15 @@
 						<form class="form-horizontal" role="form" id="repositoryAdmin_form_edit"
 							style="margin-top: 25px">
 							<div class="form-group">
-								<label for="" class="control-label col-md-5 col-sm-5"> <span>仓库管理员姓名：</span>
+								<label for="" class="control-label col-md-5 col-sm-5"> <span>猎头姓名：</span>
 								</label>
 								<div class="col-md-7 col-sm-7">
 									<input type="text" class="form-control" id="repositoryAdmin_name_edit"
-										name="repositoryAdmin_name" placeholder="仓库管理员姓名">
+										name="repositoryAdmin_name" placeholder="猎头姓名">
 								</div>
 							</div>
 							<div class="form-group">
-								<label for="" class="control-label col-md-5 col-sm-5"> <span>仓库管理员性别:</span>
+								<label for="" class="control-label col-md-5 col-sm-5"> <span>猎头性别:</span>
 								</label>
 								<div class="col-md-5 col-sm-5">
 									<select name="" class="form-control" id="repositoryAdmin_sex_edit">
@@ -944,7 +882,7 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label for="" class="control-label col-md-5 col-sm-5"> <span>所属仓库ID：</span>
+								<label for="" class="control-label col-md-5 col-sm-5"> <span>关联员工：</span>
 								</label>
 								<div class="col-md-7 col-sm-7">
 									<select name="" class="form-control" id="repositoryAdmin_repoID_edit">
@@ -955,9 +893,10 @@
 							<div class="form-group hide" id="repositoryInfo">
 								<div class="col-md-2"></div>
 								<div class="col-md-10 alert alert-info">
-									<div><label>仓库地址：</label><span id="repository_address"></span></div>
-									<div><label>仓库面积：</label><span id="repository_area"></span></div>
-									<div><label>仓库状态:</label><span id="repository_status"></span></div>
+									<div><label>员工状态：</label><span id="repository_status"></span></div>
+									<div><label>员工姓名：</label><span id="repository_name"></span></div>
+									<div><label>员工性别：</label><span id="repository_sex"></span></div>
+									<div><label>员工住址：</label><span id="repository_address"></span></div>
 								</div>
 							</div>
 						</form>

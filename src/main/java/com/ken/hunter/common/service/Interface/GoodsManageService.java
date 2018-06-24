@@ -44,6 +44,10 @@ public interface GoodsManageService {
      * @return 结果的一个Map，其中： key为 data 的代表记录数据；key 为 total 代表结果记录的数量
      */
     Map<String, Object> selectByName(String goodsName) throws GoodsManageServiceException;
+    
+    Map<String, Object> selectByCustomerName(String goodsCustomerName) throws GoodsManageServiceException;
+    Map<String, Object> selectByCustomerId(Integer goodsCustomerId) throws GoodsManageServiceException;
+    Map<String, Object> selectCustomerList() throws GoodsManageServiceException;
 
     /**
      * 分页查询货物记录

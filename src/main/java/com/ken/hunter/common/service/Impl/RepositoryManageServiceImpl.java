@@ -53,11 +53,11 @@ public class RepositoryManageServiceImpl implements RepositoryService {
     public Map<String, Object> selectById(Integer repositoryId) throws RepositoryManageServiceException {
         // 初始化結果集
         Map<String, Object> resultSet = new HashMap<>();
-        List<Repository> repositories = new ArrayList<>();
+        List<Supplier> repositories = new ArrayList<>();
         long total = 0;
 
         // 查詢
-        Repository repository;
+        Supplier repository;
         try {
             repository = repositoryMapper.selectByID(repositoryId);
         } catch (PersistenceException e) {
@@ -86,7 +86,7 @@ public class RepositoryManageServiceImpl implements RepositoryService {
     public Map<String, Object> selectByAddress(int offset, int limit, String address) throws RepositoryManageServiceException {
         // 初始化結果集
         Map<String, Object> resultSet = new HashMap<>();
-        List<Repository> repositories;
+        List<Supplier> repositories;
         long total = 0;
         boolean isPagination = true;
 
@@ -100,7 +100,7 @@ public class RepositoryManageServiceImpl implements RepositoryService {
                 PageHelper.offsetPage(offset, limit);
                 repositories = repositoryMapper.selectByAddress(address);
                 if (repositories != null) {
-                    PageInfo<Repository> pageInfo = new PageInfo<>(repositories);
+                    PageInfo<Supplier> pageInfo = new PageInfo<>(repositories);
                     total = pageInfo.getTotal();
                 } else
                     repositories = new ArrayList<>();
@@ -142,7 +142,7 @@ public class RepositoryManageServiceImpl implements RepositoryService {
     public Map<String, Object> selectAll(int offset, int limit) throws RepositoryManageServiceException {
         // 初始化结果集
         Map<String, Object> resultSet = new HashMap<>();
-        List<Repository> repositories;
+        List<Supplier> repositories;
         long total = 0;
         boolean isPagination = true;
 
@@ -156,7 +156,7 @@ public class RepositoryManageServiceImpl implements RepositoryService {
                 PageHelper.offsetPage(offset, limit);
                 repositories = repositoryMapper.selectAll();
                 if (repositories != null) {
-                    PageInfo<Repository> pageInfo = new PageInfo<>(repositories);
+                    PageInfo<Supplier> pageInfo = new PageInfo<>(repositories);
                     total = pageInfo.getTotal();
                 } else
                     repositories = new ArrayList<>();
@@ -192,160 +192,8 @@ public class RepositoryManageServiceImpl implements RepositoryService {
      * @param repository 仓库信息
      * @return 若仓库信息满足要求则返回true，否则返回false
      */
-    private boolean repositoryCheck(Repository repository) {
-        return repository.getAddress() != null && repository.getStatus() != null && repository.getArea() != null;
-    }
-
-    /**
-     * 添加仓库记录
-     *
-     * @param repository 仓库信息
-     * @return 返回一个boolean值，值为true代表更新成功，否则代表失败
-     */
-    @UserOperation(value = "添加仓库信息")
-    @Override
-    public boolean addRepository(Repository repository) throws RepositoryManageServiceException {
-
-        // 插入一条新的记录
-        if (repository != null) {
-            try {
-                // 有效性验证
-                if (repositoryCheck(repository))
-                    repositoryMapper.insert(repository);
-                if (repository.getId() != null) {
-                    return true;
-                }
-            } catch (PersistenceException e) {
-                throw new RepositoryManageServiceException(e);
-            }
-        }
-        return false;
-    }
-
-    /**
-     * 更新仓库记录
-     *
-     * @param repository 仓库信息
-     * @return 返回一个boolean值，值为true代表更新成功，否则代表失败
-     */
-    @UserOperation(value = "修改仓库信息")
-    @Override
-    public boolean updateRepository(Repository repository) throws RepositoryManageServiceException {
-
-        // 更新仓库记录
-        if (repository != null) {
-            // 有效性验证
-            try {
-                if (repositoryCheck(repository)) {
-                    if (repository.getId() != null) {
-                        repositoryMapper.update(repository);
-                        return true;
-                    }
-                }
-            } catch (PersistenceException e) {
-                throw new RepositoryManageServiceException(e);
-            }
-        }
-        return false;
-    }
-
-    /**
-     * 删除仓库记录
-     *
-     * @param repositoryId 仓库ID
-     * @return 返回一个boolean值，值为true代表更新成功，否则代表失败
-     */
-    @UserOperation(value = "删除仓库信息")
-    @Override
-    public boolean deleteRepository(Integer repositoryId) throws RepositoryManageServiceException {
-
-        try {
-            // 检查是否存在出库记录
-            List<StockOutDO> stockOutDOList = stockOutMapper.selectByRepositoryID(repositoryId);
-            if (stockOutDOList != null && !stockOutDOList.isEmpty())
-                return false;
-
-            // 检查是否存在入库记录
-            List<StockInDO> stockInDOList = stockInMapper.selectByRepositoryID(repositoryId);
-            if (stockInDOList != null && !stockInDOList.isEmpty())
-                return false;
-
-            // 检查是否存在库存记录
-            List<Storage> storageRecords = storageMapper.selectAllAndRepositoryID(repositoryId);
-            if (storageRecords != null && !storageRecords.isEmpty())
-                return false;
-
-            // 检查是否已指派仓库管理员
-            RepositoryAdmin repositoryAdmin = repositoryAdminMapper.selectByRepositoryID(repositoryId);
-            if (repositoryAdmin != null)
-                return false;
-
-            // 删除记录
-            repositoryMapper.deleteByID(repositoryId);
-
-            return true;
-        } catch (PersistenceException e) {
-            throw new RepositoryManageServiceException(e);
-        }
-    }
-
-    /**
-     * 从文件中导入仓库信息
-     *
-     * @param file 导入信息的文件
-     * @return 返回一个Map，其中：key为total代表导入的总记录数，key为available代表有效导入的记录数
-     */
-    @UserOperation(value = "导入仓库信息")
-    @Override
-    public Map<String, Object> importRepository(MultipartFile file) throws RepositoryManageServiceException {
-        // 初始化结果集
-        Map<String, Object> resultSet = new HashMap<>();
-        int total = 0;
-        int available = 0;
-
-        // 从文件中读取
-        try {
-            List<Repository> repositories = ejConvertor.excelReader(Repository.class, FileUtil.convertMultipartFileToFile(file));
-
-            if (repositories != null) {
-                total = repositories.size();
-
-                // 验证每一条记录
-                List<Repository> availableList = new ArrayList<>();
-                for (Repository repository : repositories) {
-                    if (repository.getAddress() != null && repository.getStatus() != null && repository.getArea() != null)
-                        availableList.add(repository);
-                }
-
-                // 保存到数据库
-                available = availableList.size();
-                if (available > 0)
-                    repositoryMapper.insertbatch(availableList);
-            }
-        } catch (PersistenceException | IOException e) {
-            throw new RepositoryManageServiceException(e);
-        }
-
-
-        resultSet.put("total", total);
-        resultSet.put("available", available);
-        return resultSet;
-    }
-
-    /**
-     * 导出仓库信息到文件中
-     *
-     * @param repositories 包含若干条 Supplier 信息的 List
-     * @return excel 文件
-     */
-    @UserOperation(value = "导出仓库信息")
-    @Override
-    public File exportRepository(List<Repository> repositories) {
-        if (repositories == null)
-            return null;
-
-        // 导出为文件
-        return ejConvertor.excelWriter(Repository.class, repositories);
+    private boolean repositoryCheck(Supplier repository) {
+        return repository.getAddress() != null && repository.getId() != null;
     }
 
     /**
@@ -357,7 +205,7 @@ public class RepositoryManageServiceImpl implements RepositoryService {
     public Map<String, Object> selectUnassign() throws RepositoryManageServiceException {
         // 初始化结果集
         Map<String, Object> resultSet = new HashMap<>();
-        List<Repository> repositories;
+        List<Supplier> repositories;
         long total = 0;
 
         // 查询

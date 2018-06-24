@@ -29,7 +29,7 @@ public interface SupplierMapper {
 	 * @param supplierName 供应商名称
 	 * @return 返回supplierName对应的供应商
 	 */
-	Supplier selectBuName(String supplierName);
+	Supplier selectByPerson(String person);
 	
 	/**
 	 * 选择指定 supplier name 的 Supplier

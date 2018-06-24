@@ -27,12 +27,15 @@
 			if (type == "所有") {
 				$("#search_input").attr("readOnly", "true");
 				search_type_goods = "searchAll";
-			} else if (type == "货物ID") {
+			} else if (type == "职位ID") {
 				$("#search_input").removeAttr("readOnly");
 				search_type_goods = "searchByID";
-			} else if (type == "货物名称") {
+			} else if (type == "职位名称") {
 				$("#search_input").removeAttr("readOnly");
 				search_type_goods = "searchByName";
+			} else if (type == "客户名称") {
+				$("#search_input").removeAttr("readOnly");
+				search_type_goods = "searchByCustomerName";
 			} else {
 				$("#search_input").removeAttr("readOnly");
 			}
@@ -69,24 +72,32 @@
 							columns : [
 									{
 										field : 'id',
-										title : '货物ID'
+										title : '职位ID'
 									//sortable: true
 									},
 									{
+										field : 'customerName',
+										title : '客户名称'
+									},
+									{
 										field : 'name',
-										title : '货物名称'
+										title : '职位名称'
 									},
 									{
 										field : 'type',
-										title : '货物类型'
+										title : '职位类型'
 									},
 									{
 										field : 'size',
-										title : '货物尺寸'
+										title : '招收人数'
+									},
+									{
+										field : 'work',
+										title : '工作经验'
 									},
 									{
 										field : 'value',
-										title : '货物价值',
+										title : '职位要求',
 									},
 									{
 										field : 'operation',
@@ -145,6 +156,15 @@
 		$('#goods_type_edit').val(row.type);
 		$('#goods_size_edit').val(row.size);
 		$('#goods_value_edit').val(row.value);
+		$('#goods_work_edit').val(row.work);
+		
+		// 加载未分配仓库信息
+		if(row.customerId != null){
+			$('#goods_customerId_edit').append("<option value='" + row.customerId + "'>" + row.customerName + "</option>");
+			$('#goods_customerId_edit').val(row.customerId);
+			$("#goods_customerId_edit").attr("disabled", "true");
+		}
+		
 	}
 
 	// 添加供应商模态框数据校验
@@ -161,14 +181,42 @@
 				goods_name : {
 					validators : {
 						notEmpty : {
-							message : '货物名称不能为空'
+							message : '职位名称不能为空'
 						}
 					}
 				},
 				goods_value : {
 					validators : {
 						notEmpty : {
-							message : '货物价值不能为空'
+							message : '职位要求不能为空'
+						}
+					}
+				},
+				goods_size : {
+					validators : {
+						notEmpty : {
+							message : '招收人数不能为空'
+						}
+					}
+				},
+				goods_type : {
+					validators : {
+						notEmpty : {
+							message : '学历不能为空'
+						}
+					}
+				},
+				goods_work : {
+					validators : {
+						notEmpty : {
+							message : '工作经验不能为空'
+						}
+					}
+				},
+				goods_customerId : {
+					validators : {
+						notEmpty : {
+							message : '关联客户不能为空'
 						}
 					}
 				}
@@ -176,7 +224,7 @@
 		})
 	}
 
-	// 编辑货物信息
+	// 编辑职位信息
 	function editGoodsAction() {
 		$('#edit_modal_submit').click(
 				function() {
@@ -186,13 +234,14 @@
 							.isValid()) {
 						return;
 					}
-
 					var data = {
 						id : selectID,
 						name : $('#goods_name_edit').val(),
 						type : $('#goods_type_edit').val(),
 						size : $('#goods_size_edit').val(),
 						value : $('#goods_value_edit').val(),
+						work : $('#goods_work_edit').val(),
+						customerId : $('#goods_customerId_edit').val()
 					}
 
 					// ajax
@@ -209,10 +258,10 @@
 							var append = '';
 							if (response.result == "success") {
 								type = "success";
-								msg = "货物信息更新成功";
+								msg = "职位信息更新成功";
 							} else if (resposne == "error") {
 								type = "error";
-								msg = "货物信息更新失败"
+								msg = "职位信息更新失败"
 							}
 							shohunterg(type, msg, append);
 							tableRefresh();
@@ -226,7 +275,7 @@
 				});
 	}
 
-	// 刪除货物信息
+	// 刪除职位信息
 	function deleteGoodsAction(){
 		$('#delete_confirm').click(function(){
 			var data = {
@@ -247,10 +296,10 @@
 					var append = '';
 					if(response.result == "success"){
 						type = "success";
-						msg = "货物信息删除成功";
+						msg = "职位信息删除成功";
 					}else{
 						type = "error";
-						msg = "货物信息删除失败";
+						msg = "职位信息删除失败";
 					}
 					shohunterg(type, msg, append);
 					tableRefresh();
@@ -265,18 +314,46 @@
 		})
 	}
 
-	// 添加货物信息
+	// 添加职位信息
 	function addGoodsAction() {
 		$('#add_goods').click(function() {
 			$('#add_modal').modal("show");
+			$.ajax({
+				type : 'GET',
+				url : 'goodsManage/getCustomerList',
+				dataType : 'json',
+				contentTypr : 'application/json',
+				success : function(response){
+					data = response.data;
+					$.each(data,function(index,element){
+						$('#goods_customerId').append("<option value='" + element.customerId + "'>" + element.customerName + "</option>");
+					})
+				}
+			});
 		});
+		
+		/* $('#goods_customerId').on("change", function() {
+			var select = document.getElementById("goods_customerId");
+			var options = select.options;
+			var index = select.selectedIndex;
+			var selectedText = options[index].text;
+			$('#goods_customerName').val(selectedText);
+			alert($('#goods_customerId').val());
+		}); */
 
 		$('#add_modal_submit').click(function() {
+			$('#goods_form').data('bootstrapValidator').validate();
+			if (!$('#goods_form').data('bootstrapValidator')
+					.isValid()) {
+				return;
+			}	
 			var data = {
 				name : $('#goods_name').val(),
 				type : $('#goods_type').val(),
 				size : $('#goods_size').val(),
 				value : $('#goods_value').val(),
+				work : $('#goods_work').val(),
+				customerId : $('#goods_customerId').val()
 			}
 			// ajax
 			$.ajax({
@@ -292,10 +369,10 @@
 					var append = '';
 					if (response.result == "success") {
 						type = "success";
-						msg = "货物添加成功";
+						msg = "职位添加成功";
 					} else if (response.result == "error") {
 						type = "error";
-						msg = "货物添加失败";
+						msg = "职位添加失败";
 					}
 					shohunterg(type, msg, append);
 					tableRefresh();
@@ -305,6 +382,8 @@
 					$('#goods_type').val("");
 					$('#goods_size').val("");
 					$('#goods_value').val("");
+					$('#goods_work').val("");
+					$('#goods_customerId').val("");
 					$('#goods_form').bootstrapValidator("resetForm", true);
 				},
 				error : function(xhr, textStatus, errorThrow) {
@@ -319,7 +398,7 @@
 	var import_step = 1;
 	var import_start = 1;
 	var import_end = 3;
-	// 导入货物信息
+	// 导入职位信息
 	function importGoodsAction() {
 		$('#import_goods').click(function() {
 			$('#import_modal').modal("show");
@@ -371,8 +450,8 @@
 				success : function(data, status){
 					var total = 0;
 					var available = 0;
-					var msg1 = "货物信息导入成功";
-					var msg2 = "货物信息导入失败";
+					var msg1 = "职位信息导入成功";
+					var msg2 = "职位信息导入失败";
 					var info;
 
 					$('#import_progress_bar').addClass("hide");
@@ -402,7 +481,7 @@
 		})
 	}
 
-	// 导出货物信息
+	// 导出职位信息
 	function exportGoodsAction() {
 		$('#export_goods').click(function() {
 			$('#export_modal').modal("show");
@@ -419,7 +498,7 @@
 		})
 	}
 
-	// 导入货物模态框重置
+	// 导入职位模态框重置
 	function importModalReset(){
 		var i;
 		for(i = import_start; i <= import_end; i++){
@@ -463,7 +542,7 @@
 </script>
 <div class="panel panel-default">
 	<ol class="breadcrumb">
-		<li>货物信息管理</li>
+		<li>职位信息管理</li>
 	</ol>
 	<div class="panel-body">
 		<div class="row">
@@ -474,8 +553,9 @@
 						<span id="search_type">查询方式</span> <span class="caret"></span>
 					</button>
 					<ul class="dropdown-menu" role="menu">
-						<li><a href="javascript:void(0)" class="dropOption">货物ID</a></li>
-						<li><a href="javascript:void(0)" class="dropOption">货物名称</a></li>
+						<li><a href="javascript:void(0)" class="dropOption">职位ID</a></li>
+						<li><a href="javascript:void(0)" class="dropOption">职位名称</a></li>
+						<li><a href="javascript:void(0)" class="dropOption">客户名称</a></li>
 						<li><a href="javascript:void(0)" class="dropOption">所有</a></li>
 					</ul>
 				</div>
@@ -484,7 +564,7 @@
 				<div>
 					<div class="col-md-3 col-sm-4">
 						<input id="search_input" type="text" class="form-control"
-							placeholder="货物ID">
+							placeholder="职位ID">
 					</div>
 					<div class="col-md-2 col-sm-2">
 						<button id="search_button" class="btn btn-success">
@@ -498,7 +578,7 @@
 		<div class="row" style="margin-top: 25px">
 			<div class="col-md-5">
 				<button class="btn btn-sm btn-default" id="add_goods">
-					<span class="glyphicon glyphicon-plus"></span> <span>添加货物信息</span>
+					<span class="glyphicon glyphicon-plus"></span> <span>添加职位信息</span>
 				</button>
 				<button class="btn btn-sm btn-default" id="import_goods">
 					<span class="glyphicon glyphicon-import"></span> <span>导入</span>
@@ -518,7 +598,7 @@
 	</div>
 </div>
 
-<!-- 添加货物信息模态框 -->
+<!-- 添加职位信息模态框 -->
 <div id="add_modal" class="modal fade" table-index="-1" role="dialog"
 	aria-labelledby="myModalLabel" aria-hidden="true"
 	data-backdrop="static">
@@ -527,7 +607,7 @@
 			<div class="modal-header">
 				<button class="close" type="button" data-dismiss="modal"
 					aria-hidden="true">&times;</button>
-				<h4 class="modal-title" id="myModalLabel">添加货物信息</h4>
+				<h4 class="modal-title" id="myModalLabel">添加职位信息</h4>
 			</div>
 			<div class="modal-body">
 				<!-- 模态框的内容 -->
@@ -537,35 +617,66 @@
 						<form class="form-horizontal" role="form" id="goods_form"
 							style="margin-top: 25px">
 							<div class="form-group">
-								<label for="" class="control-label col-md-4 col-sm-4"> <span>货物名称：</span>
+								<label for="" class="control-label col-md-4 col-sm-4"> <span>职位名称：</span>
 								</label>
 								<div class="col-md-8 col-sm-8">
 									<input type="text" class="form-control" id="goods_name"
-										name="goods_name" placeholder="货物名称">
+										name="goods_name" placeholder="职位名称">
 								</div>
 							</div>
 							<div class="form-group">
-								<label for="" class="control-label col-md-4 col-sm-4"> <span>货物类型：</span>
+								<label for="" class="control-label col-md-4 col-sm-4"> <span>学历：</span>
 								</label>
 								<div class="col-md-8 col-sm-8">
-									<input type="text" class="form-control" id="goods_type"
-										name="goods_type" placeholder="货物类型">
+									<select name="goods_type" class="form-control" id="goods_type">
+										<option value="">-- 请选择 --</option>
+										<option value="初中">初中</option>
+										<option value="高中">高中</option>
+										<option value="大专">大专</option>
+										<option value="本科">本科</option>
+										<option value="硕士">硕士</option>
+										<option value="博士">博士</option>
+									</select>
 								</div>
 							</div>
 							<div class="form-group">
-								<label for="" class="control-label col-md-4 col-sm-4"> <span>货物尺寸：</span>
+								<label for="" class="control-label col-md-4 col-sm-4"> <span>招收人数：</span>
 								</label>
 								<div class="col-md-8 col-sm-8">
 									<input type="text" class="form-control" id="goods_size"
-										name="goods_size" placeholder="货物尺寸">
+										name="goods_size" placeholder="招收人数">
 								</div>
 							</div>
 							<div class="form-group">
-								<label for="" class="control-label col-md-4 col-sm-4"> <span>货物价值：</span>
+								<label for="" class="control-label col-md-4 col-sm-4"> <span>工作经验：</span>
 								</label>
 								<div class="col-md-8 col-sm-8">
-									<input type="text" class="form-control" id="goods_value"
-										name="goods_value" placeholder="货物价值">
+									<select name="goods_work" class="form-control" id="goods_work">
+										<option value="">-- 请选择 --</option>
+										<option value="1-2年">1-2年</option>
+										<option value="3-4年">3-4年</option>
+										<option value="5-6年">5-6年</option>
+										<option value="7-8年">7-8年</option>
+										<option value="9-10年">9-10年</option>
+										<option value="10年以上">10年以上</option>
+									</select>
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="" class="control-label col-md-4 col-sm-4"> <span>关联客户：</span>
+								</label>
+								<div class="col-md-8 col-sm-8">
+									<select name="goods_customerId" class="form-control" id="goods_customerId">
+										<option value=""></option>
+									</select>
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="" class="control-label col-md-4 col-sm-4"> <span>职位要求：</span>
+								</label>
+								<div class="col-md-8 col-sm-8">
+									<textarea class="form-control" id="goods_value"
+										name="goods_value" placeholder="职位要求" style="width: 100%;height: 125px;"></textarea>
 								</div>
 							</div>
 						</form>
@@ -585,7 +696,7 @@
 	</div>
 </div>
 
-<!-- 导入货物信息模态框 -->
+<!-- 导入职位信息模态框 -->
 <div class="modal fade" id="import_modal" table-index="-1" role="dialog"
 	aria-labelledby="myModalLabel" aria-hidden="true"
 	data-backdrop="static">
@@ -594,7 +705,7 @@
 			<div class="modal-header">
 				<button class="close" type="button" data-dismiss="modal"
 					aria-hidden="true">&times;</button>
-				<h4 class="modal-title" id="myModalLabel">导入货物信息</h4>
+				<h4 class="modal-title" id="myModalLabel">导入职位信息</h4>
 			</div>
 			<div class="modal-body">
 				<div id="step1">
@@ -602,7 +713,7 @@
 						<div class="col-md-1 col-sm-1"></div>
 						<div class="col-md-10 col-sm-10">
 							<div>
-								<h4>点击下面的下载按钮，下载货物信息电子表格</h4>
+								<h4>点击下面的下载按钮，下载职位信息电子表格</h4>
 							</div>
 							<div style="margin-top: 30px; margin-buttom: 15px">
 								<a class="btn btn-info"
@@ -619,7 +730,7 @@
 						<div class="col-md-1 col-sm-1"></div>
 						<div class="col-md-10 col-sm-10">
 							<div>
-								<h4>请按照货物信息电子表格中指定的格式填写需要添加的一个或多个货物信息</h4>
+								<h4>请按照职位信息电子表格中指定的格式填写需要添加的一个或多个职位信息</h4>
 							</div>
 							<div class="alert alert-info"
 								style="margin-top: 10px; margin-buttom: 30px">
@@ -634,7 +745,7 @@
 						<div class="col-md-8 col-sm-10">
 							<div>
 								<div>
-									<h4>请点击下面上传文件按钮，上传填写好的货物信息电子表格</h4>
+									<h4>请点击下面上传文件按钮，上传填写好的职位信息电子表格</h4>
 								</div>
 								<div style="margin-top: 30px; margin-buttom: 15px">
 									<span class="btn btn-info btn-file"> <span> <span
@@ -711,7 +822,7 @@
 	</div>
 </div>
 
-<!-- 导出货物信息模态框 -->
+<!-- 导出职位信息模态框 -->
 <div class="modal fade" id="export_modal" table-index="-1" role="dialog"
 	aria-labelledby="myModalLabel" aria-hidden="true"
 	data-backdrop="static">
@@ -720,7 +831,7 @@
 			<div class="modal-header">
 				<button class="close" type="button" data-dismiss="modal"
 					aria-hidden="true">&times;</button>
-				<h4 class="modal-title" id="myModalLabel">导出货物信息</h4>
+				<h4 class="modal-title" id="myModalLabel">导出职位信息</h4>
 			</div>
 			<div class="modal-body">
 				<div class="row">
@@ -729,8 +840,8 @@
 							style="width: 70px; height: 70px; margin-top: 20px;">
 					</div>
 					<div class="col-md-8 col-sm-8">
-						<h3>是否确认导出货物信息</h3>
-						<p>(注意：请确定要导出的货物信息，导出的内容为当前列表的搜索结果)</p>
+						<h3>是否确认导出职位信息</h3>
+						<p>(注意：请确定要导出的职位信息，导出的内容为当前列表的搜索结果)</p>
 					</div>
 				</div>
 			</div>
@@ -763,8 +874,8 @@
 							style="width: 70px; height: 70px; margin-top: 20px;">
 					</div>
 					<div class="col-md-8 col-sm-8">
-						<h3>是否确认删除该条货物信息</h3>
-						<p>(注意：若该货物已经有仓库进出库记录或有仓存记录，则该货物信息将不能删除成功。如需删除该货物的信息，请先确保该货物没有关联的仓库进出库记录或有仓存记录)</p>
+						<h3>是否确认删除该条职位信息</h3>
+						<p>(注意：若该职位已经有仓库进出库记录或有仓存记录，则该职位信息将不能删除成功。如需删除该职位的信息，请先确保该职位没有关联的仓库进出库记录或有仓存记录)</p>
 					</div>
 				</div>
 			</div>
@@ -780,7 +891,7 @@
 	</div>
 </div>
 
-<!-- 编辑货物信息模态框 -->
+<!-- 编辑职位信息模态框 -->
 <div id="edit_modal" class="modal fade" table-index="-1" role="dialog"
 	aria-labelledby="myModalLabel" aria-hidden="true"
 	data-backdrop="static">
@@ -789,7 +900,7 @@
 			<div class="modal-header">
 				<button class="close" type="button" data-dismiss="modal"
 					aria-hidden="true">&times;</button>
-				<h4 class="modal-title" id="myModalLabel">编辑货物信息</h4>
+				<h4 class="modal-title" id="myModalLabel">编辑职位信息</h4>
 			</div>
 			<div class="modal-body">
 				<!-- 模态框的内容 -->
@@ -799,37 +910,66 @@
 						<form class="form-horizontal" role="form" id="goods_form_edit"
 							style="margin-top: 25px">
 							<div class="form-group">
-								<label for="" class="control-label col-md-4 col-sm-4"> <span>货物名称：</span>
+								<label for="" class="control-label col-md-4 col-sm-4"> <span>职位名称：</span>
 								</label>
 								<div class="col-md-8 col-sm-8">
 									<input type="text" class="form-control" id="goods_name_edit"
-										name="goods_name" placeholder="货物名称">
+										name="goods_name" placeholder="职位名称">
 								</div>
 							</div>
 							<div class="form-group">
-								<label for="" class="control-label col-md-4 col-sm-4"> <span>货物类型：</span>
+								<label for="" class="control-label col-md-4 col-sm-4"> <span>学历：</span>
 								</label>
 								<div class="col-md-8 col-sm-8">
-									<input type="text" class="form-control"
-										id="goods_type_edit" name="goods_type"
-										placeholder="货物类型">
+									<select name="goods_type" class="form-control" id="goods_type_edit">
+										<option value="">-- 请选择 --</option>
+										<option value="初中">初中</option>
+										<option value="高中">高中</option>
+										<option value="大专">大专</option>
+										<option value="本科">本科</option>
+										<option value="硕士">硕士</option>
+										<option value="博士">博士</option>
+									</select>
 								</div>
 							</div>
 							<div class="form-group">
-								<label for="" class="control-label col-md-4 col-sm-4"> <span>货物尺寸：</span>
+								<label for="" class="control-label col-md-4 col-sm-4"> <span>招收人数：</span>
 								</label>
 								<div class="col-md-8 col-sm-8">
 									<input type="text" class="form-control" id="goods_size_edit"
-										name="goods_size" placeholder="货物尺寸">
+										name="goods_size" placeholder="招收人数">
 								</div>
 							</div>
 							<div class="form-group">
-								<label for="" class="control-label col-md-4 col-sm-4"> <span>货物价值：</span>
+								<label for="" class="control-label col-md-4 col-sm-4"> <span>工作经验：</span>
 								</label>
 								<div class="col-md-8 col-sm-8">
-									<input type="text" class="form-control"
-										id="goods_value_edit" name="goods_value"
-										placeholder="货物价值">
+									<select name="goods_work" class="form-control" id="goods_work_edit">
+										<option value="">-- 请选择 --</option>
+										<option value="1-2年">1-2年</option>
+										<option value="3-4年">3-4年</option>
+										<option value="5-6年">5-6年</option>
+										<option value="7-8年">7-8年</option>
+										<option value="9-10年">9-10年</option>
+										<option value="10年以上">10年以上</option>
+									</select>
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="" class="control-label col-md-4 col-sm-4"> <span>关联客户：</span>
+								</label>
+								<div class="col-md-8 col-sm-8">
+									<select name="goods_customerId" class="form-control" id="goods_customerId_edit">
+										<option value=""></option>
+									</select>
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="" class="control-label col-md-4 col-sm-4"> <span>职位要求：</span>
+								</label>
+								<div class="col-md-8 col-sm-8">
+									<textarea class="form-control" id="goods_value_edit"
+										name="goods_value" placeholder="职位要求" style="width: 100%;height: 125px;"></textarea>
 								</div>
 							</div>
 						</form>

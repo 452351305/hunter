@@ -39,15 +39,15 @@ public class StockRecordManageServiceImpl implements StockRecordManageService {
     private StockOutMapper stockOutMapper;
 
     /**
-     * 货物入库操作
+     * 人才入库操作
      *
      * @param supplierID   供应商ID
-     * @param goodsID      货物ID
+     * @param goodsID      人才ID
      * @param repositoryID 入库仓库ID
      * @param number       入库数量
      * @return 返回一个boolean 值，若值为true表示入库成功，否则表示入库失败
      */
-    @UserOperation(value = "货物入库")
+    @UserOperation(value = "人才入库")
     @Override
     public boolean stockInOperation(Integer supplierID, Integer goodsID, Integer repositoryID, long number, String personInCharge) throws StockRecordManageServiceException {
 
@@ -86,15 +86,15 @@ public class StockRecordManageServiceImpl implements StockRecordManageService {
     }
 
     /**
-     * 货物出库操作
+     * 人才出库操作
      *
      * @param customerID   客户ID
-     * @param goodsID      货物ID
+     * @param goodsID      人才ID
      * @param repositoryID 出库仓库ID
      * @param number       出库数量
      * @return 返回一个boolean值，若值为true表示出库成功，否则表示出库失败
      */
-    @UserOperation(value = "货物出库")
+    @UserOperation(value = "人才出库")
     @Override
     public boolean stockOutOperation(Integer customerID, Integer goodsID, Integer repositoryID, long number, String personInCharge) throws StockRecordManageServiceException {
 
@@ -382,9 +382,9 @@ public class StockRecordManageServiceImpl implements StockRecordManageService {
 
 
     /**
-     * 检查货物ID对应的记录是否存在
+     * 检查人才ID对应的记录是否存在
      *
-     * @param goodsID 货物ID
+     * @param goodsID 人才ID
      * @return 若存在则返回true，否则返回false
      */
     private boolean goodsValidate(Integer goodsID) throws StockRecordManageServiceException {

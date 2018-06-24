@@ -25,7 +25,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 供应商信息管理 service 实现类
+ * 员工信息管理 service 实现类
  *
  * @author Ken
  */
@@ -40,9 +40,9 @@ public class SupplierManageServiceImpl implements SupplierManageService {
     private EJConvertor ejConvertor;
 
     /**
-     * 返回指定supplierID 的供应商记录
+     * 返回指定supplierID 的员工记录
      *
-     * @param supplierId 供应商ID
+     * @param supplierId 员工ID
      * @return 结果的一个Map，其中： key为 data 的代表记录数据；key 为 total 代表结果记录的数量
      */
     @Override
@@ -70,15 +70,15 @@ public class SupplierManageServiceImpl implements SupplierManageService {
     }
 
     /**
-     * 返回指定 supplierName 的供应商记录 支持查询分页以及模糊查询
+     * 返回指定 supplierName 的员工记录 支持查询分页以及模糊查询
      *
      * @param offset       分页的偏移值
      * @param limit        分页德大小
-     * @param supplierName 供应商德名称
+     * @param supplierName 员工德名称
      * @return 结果的一个Map，其中： key为 data 的代表记录数据；key 为 total 代表结果记录的数量
      */
     @Override
-    public Map<String, Object> selectByName(int offset, int limit, String supplierName) throws SupplierManageServiceException {
+    public Map<String, Object> selectByPerson(int offset, int limit, String supplierName) throws SupplierManageServiceException {
         // 初始化结果集
         Map<String, Object> resultSet = new HashMap<>();
         List<Supplier> suppliers;
@@ -116,18 +116,18 @@ public class SupplierManageServiceImpl implements SupplierManageService {
     }
 
     /**
-     * 返回指定 supplierName 的供应商记录 支持模糊查询
+     * 返回指定 supplierName 的员工记录 支持模糊查询
      *
-     * @param supplierName supplierName 供应商德名称
+     * @param supplierName supplierName 员工德名称
      * @return 结果的一个Map，其中： key为 data 的代表记录数据；key 为 total 代表结果记录的数量
      */
     @Override
-    public Map<String, Object> selectByName(String supplierName) throws SupplierManageServiceException {
-        return selectByName(-1, -1, supplierName);
+    public Map<String, Object> selectByPerson(String person) throws SupplierManageServiceException {
+        return selectByPerson(-1, -1, person);
     }
 
     /**
-     * 分页查询供应商记录
+     * 分页查询员工记录
      *
      * @param offset 分页的偏移值
      * @param limit  分页的大小
@@ -172,7 +172,7 @@ public class SupplierManageServiceImpl implements SupplierManageService {
     }
 
     /**
-     * 查询所有的供应商记录
+     * 查询所有的员工记录
      *
      * @return 结果的一个Map，其中： key为 data 的代表记录数据；key 为 total 代表结果记录的数量
      */
@@ -182,24 +182,24 @@ public class SupplierManageServiceImpl implements SupplierManageService {
     }
 
     /**
-     * 检验供应商信息是否满足要求
+     * 检验员工信息是否满足要求
      *
-     * @param supplier 供应商信息
-     * @return 若供应商上的属性均有满足要求则返回true，否则返回false
+     * @param supplier 员工信息
+     * @return 若员工上的属性均有满足要求则返回true，否则返回false
      */
     private boolean supplierCheck(Supplier supplier) {
         // 检查是否已填写属性
-        return supplier.getName() != null && supplier.getPersonInCharge() != null
+        return supplier.getSex() != null && supplier.getPersonInCharge() != null
                 && supplier.getTel() != null && supplier.getEmail() != null && supplier.getAddress() != null;
     }
 
     /**
-     * 添加供应商记录
+     * 添加员工记录
      *
-     * @param supplier 供应商信息
+     * @param supplier 员工信息
      * @return 返回添加结果
      */
-    @UserOperation(value = "添加供应商信息")
+    @UserOperation(value = "添加员工信息")
     @Override
     public boolean addSupplier(Supplier supplier) throws SupplierManageServiceException {
 
@@ -208,7 +208,7 @@ public class SupplierManageServiceImpl implements SupplierManageService {
             try {
                 if (supplierCheck(supplier)) {
                     // 检查重名
-                    if (null == supplierMapper.selectBuName(supplier.getName())) {
+                    if (null == supplierMapper.selectByPerson(supplier.getPersonInCharge())) {
                         supplierMapper.insert(supplier);
                         if (supplier.getId() != null) {
                             return true;
@@ -223,12 +223,12 @@ public class SupplierManageServiceImpl implements SupplierManageService {
     }
 
     /**
-     * 更新供应商记录
+     * 更新员工记录
      *
-     * @param supplier 供应商信息
+     * @param supplier 员工信息
      * @return 返回一个boolean值，值为true代表更新成功，否则代表失败
      */
-    @UserOperation(value = "修改供应商信息")
+    @UserOperation(value = "修改员工信息")
     @Override
     public boolean updateSupplier(Supplier supplier) throws SupplierManageServiceException {
 
@@ -239,7 +239,7 @@ public class SupplierManageServiceImpl implements SupplierManageService {
                 if (supplierCheck(supplier)) {
                     if (supplier.getId() != null) {
                         // 检查重名
-                        Supplier supplierFromDB = supplierMapper.selectBuName(supplier.getName());
+                        Supplier supplierFromDB = supplierMapper.selectByPerson(supplier.getPersonInCharge());
                         if (supplierFromDB == null || supplier.getId().equals(supplierFromDB.getId())) {
                             supplierMapper.update(supplier);
                             return true;
@@ -254,32 +254,32 @@ public class SupplierManageServiceImpl implements SupplierManageService {
     }
 
     /**
-     * 删除供应商记录
+     * 删除员工记录
      *
-     * @param supplierId 供应商ID
+     * @param supplierId 员工ID
      * @return 返回一个boolean值，值为true代表更新成功，否则代表失败
      */
-    @UserOperation(value = "删除供应商信息")
+    @UserOperation(value = "删除员工信息")
     @Override
     public boolean deleteSupplier(Integer supplierId) {
 
-        // 查询该供应商是否有入库记录
+        // 查询该员工是否有账号记录
         List<StockInDO> records = stockInMapper.selectBySupplierId(supplierId);
         if (records == null || records.size() > 0)
             return false;
 
-        // 删除该条供应商记录
+        // 删除该条员工记录
         supplierMapper.deleteById(supplierId);
         return true;
     }
 
     /**
-     * 从文件中导入供应商信息
+     * 从文件中导入员工信息
      *
      * @param file 导入信息的文件
      * @return 返回一个Map，其中：key为total代表导入的总记录数，key为available代表有效导入的记录数
      */
-    @UserOperation(value = "导入供应商信息")
+    @UserOperation(value = "导入员工信息")
     @Override
     public Map<String, Object> importSupplier(MultipartFile file) throws SupplierManageServiceException {
         // 初始化结果集
@@ -293,12 +293,12 @@ public class SupplierManageServiceImpl implements SupplierManageService {
             if (suppliers != null) {
                 total = suppliers.size();
 
-                // 验证每一条供应商记录
+                // 验证每一条员工记录
                 List<Supplier> availableList = new ArrayList<>();
                 for (Supplier supplier : suppliers) {
                     if (supplierCheck(supplier)) {
                         // 检查重名
-                        if (null == supplierMapper.selectBuName(supplier.getName()))
+                        if (null == supplierMapper.selectByPerson(supplier.getPersonInCharge()))
                             availableList.add(supplier);
                     }
                 }
@@ -319,12 +319,12 @@ public class SupplierManageServiceImpl implements SupplierManageService {
     }
 
     /**
-     * 导出供应商信息到文件中
+     * 导出员工信息到文件中
      *
      * @param suppliers 包含若干条 Supplier 信息的 List
      * @return excel 文件
      */
-    @UserOperation(value = "导出供应商信息")
+    @UserOperation(value = "导出员工信息")
     @Override
     public File exportSupplier(List<Supplier> suppliers) {
         if (suppliers == null)

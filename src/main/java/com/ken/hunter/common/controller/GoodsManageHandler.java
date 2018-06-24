@@ -19,6 +19,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -102,6 +103,29 @@ public class GoodsManageHandler {
         responseContent.setCustomerInfo("rows", rows);
         responseContent.setResponseTotal(total);
         return responseContent.generateResponse();
+    }
+    
+    @SuppressWarnings("unchecked")
+    @RequestMapping(value = "getCustomerList", method = RequestMethod.GET)
+    public
+    @ResponseBody
+    Map<String, Object> getCustomerList() throws GoodsManageServiceException {
+    	Map<String, Object> resultSet = new HashMap<>();
+        List<Goods> data = null;
+        long total = 0;
+
+        // 查询
+        Map<String, Object> queryResult = goodsManageService.selectCustomerList();
+
+        if (queryResult != null) {
+            data = (List<Goods>) queryResult.get("data");
+            total = (long) queryResult.get("total");
+        }
+
+        // 设置 Response
+        resultSet.put("data", data);
+        resultSet.put("total", total);
+        return resultSet;
     }
 
     /**

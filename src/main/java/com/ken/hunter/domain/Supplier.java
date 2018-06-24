@@ -9,7 +9,7 @@ package com.ken.hunter.domain;
 public class Supplier {
 
 	private Integer id;// 供应商ID
-	private String name;// 供应商名
+	private String sex;// 性别
 	private String personInCharge;// 负责人
 	private String tel;// 联系电话
 	private String email;// 电子邮件
@@ -23,12 +23,12 @@ public class Supplier {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getSex() {
+		return sex;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setSex(String sex) {
+		this.sex = sex;
 	}
 
 	public String getPersonInCharge() {
@@ -65,7 +65,7 @@ public class Supplier {
 
 	@Override
 	public String toString() {
-		return "Supplier [id=" + id + ", name=" + name + ", personInCharge=" + personInCharge + ", tel=" + tel
+		return "Supplier [id=" + id + ", sex=" + sex + ", personInCharge=" + personInCharge + ", tel=" + tel
 				+ ", email=" + email + ", address=" + address + "]";
 	}
 

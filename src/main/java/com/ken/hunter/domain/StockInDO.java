@@ -15,123 +15,100 @@ public class StockInDO {
      */
     private Integer id;
 
+    private Integer userId;
     /**
-     * 供应商ID
+     * 员工ID
      */
     private Integer supplierID;
 
     /**
-     * 供应商名称
+     * 员工名称
      */
     private String supplierName;
 
     /**
-     * 商品ID
+     * 员工性别
      */
-    private Integer goodID;
+    private String sex;
 
     /**
-     * 商品名称
+     * 员工电话
      */
-    private String goodName;
+    private String tel;
 
     /**
-     * 入库仓库ID
+     * 员工邮箱
      */
-    private Integer repositoryID;
+    private String email;
 
     /**
-     * 入库数量
+     * 员工地址
      */
-    private long number;
+    private String address;
 
-    /**
-     * 入库日期
-     */
-    private Date time;
+	public Integer getId() {
+		return id;
+	}
 
-    /**
-     * 入库经手人
-     */
-    private String personInCharge;
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public Integer getRepositoryID() {
-        return repositoryID;
-    }
+	public Integer getUserId() {
+		return userId;
+	}
 
-    public void setRepositoryID(Integer repositoryID) {
-        this.repositoryID = repositoryID;
-    }
+	public void setUserId(Integer userId) {
+		this.userId = userId;
+	}
 
-    public Integer getSupplierID() {
-        return supplierID;
-    }
+	public Integer getSupplierID() {
+		return supplierID;
+	}
 
-    public void setSupplierID(Integer supplierID) {
-        this.supplierID = supplierID;
-    }
+	public void setSupplierID(Integer supplierID) {
+		this.supplierID = supplierID;
+	}
 
-    public Integer getGoodID() {
-        return goodID;
-    }
+	public String getSupplierName() {
+		return supplierName;
+	}
 
-    public void setGoodID(Integer goodID) {
-        this.goodID = goodID;
-    }
+	public void setSupplierName(String supplierName) {
+		this.supplierName = supplierName;
+	}
 
-    public Integer getId() {
-        return id;
-    }
+	public String getSex() {
+		return sex;
+	}
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	public void setSex(String sex) {
+		this.sex = sex;
+	}
 
-    public String getSupplierName() {
-        return supplierName;
-    }
+	public String getTel() {
+		return tel;
+	}
 
-    public void setSupplierName(String supplierName) {
-        this.supplierName = supplierName;
-    }
+	public void setTel(String tel) {
+		this.tel = tel;
+	}
 
-    public String getGoodName() {
-        return goodName;
-    }
+	public String getEmail() {
+		return email;
+	}
 
-    public void setGoodName(String goodName) {
-        this.goodName = goodName;
-    }
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
-    public long getNumber() {
-        return number;
-    }
+	public String getAddress() {
+		return address;
+	}
 
-    public void setNumber(long number) {
-        this.number = number;
-    }
+	public void setAddress(String address) {
+		this.address = address;
+	}
 
-    public Date getTime() {
-        return time;
-    }
-
-    public void setTime(Date time) {
-        this.time = time;
-    }
-
-    public String getPersonInCharge() {
-        return personInCharge;
-    }
-
-    public void setPersonInCharge(String personInCharge) {
-        this.personInCharge = personInCharge;
-    }
-
-    @Override
-    public String toString() {
-        return "StockInDO [id=" + id + ", supplierID=" + supplierID + ", supplierName=" + supplierName + ", goodID="
-                + goodID + ", goodName=" + goodName + ", repositoryID=" + repositoryID + ", number=" + number
-                + ", time=" + time + ", personInCharge=" + personInCharge + "]";
-    }
-
+    
 }

@@ -15,7 +15,7 @@ public class RepositoryAdmin {
 	private String tel;// 联系电话
 	private String address;// 地址
 	private Date birth;// 出生日期
-	private Integer repositoryBelongID;// 所属仓库ID
+	private Integer repositoryBelongID;// 所属员工id
 
 	
 	public Integer getRepositoryBelongID() {

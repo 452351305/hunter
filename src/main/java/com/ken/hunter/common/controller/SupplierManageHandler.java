@@ -56,7 +56,7 @@ public class SupplierManageHandler {
                 }
                 break;
             case SEARCH_BY_NAME:
-                queryResult = supplierManageService.selectByName(offset, limit, keyWord);
+                queryResult = supplierManageService.selectByPerson(offset, limit, keyWord);
                 break;
             case SEARCH_ALL:
                 queryResult = supplierManageService.selectAll(offset, limit);

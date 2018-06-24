@@ -78,7 +78,7 @@
 									},
 									{
 										field : 'personInCharge',
-										title : '负责人'
+										title : '对接人'
 									},
 									{
 										field : 'tel',
@@ -198,7 +198,7 @@
 				customer_person : {
 					validators : {
 						notEmpty : {
-							message : '客户负责人不能为空'
+							message : '客户对接人不能为空'
 						}
 					}
 				}
@@ -308,7 +308,12 @@
 				personInCharge : $('#customer_person').val(),
 				tel : $('#customer_tel').val(),
 				email : $('#customer_email').val(),
-				address : $('#customer_address').val()
+				address : $('#customer_address').val(),
+				industry : $('#customer_industry').val(),
+				enterprisescale : $('#customer_enterprisescale').val(),
+				communicater : $('#customer_communicater').val(),
+				communicatetime : $('#customer_communicatetime').val(),
+				communicateresults : $('#customer_communicateresults').val()
 			}
 			// ajax
 			$.ajax({
@@ -338,6 +343,11 @@
 					$('#customer_tel').val("");
 					$('#customer_email').val("");
 					$('#customer_address').val("");
+					$('#customer_industry').val("");
+					$('#customer_enterprisescale').val("");
+					$('#customer_communicater').val("");
+					$('#customer_communicatetime').val("");
+					$('#customer_communicateresults').val("");
 					$('#customer_form').bootstrapValidator("resetForm", true);
 				},
 				error : function(xhr, textStatus, errorThrown) {
@@ -646,7 +656,7 @@
 								</label>
 								<div class="col-md-8 col-sm-8">
 									<textarea class="form-control" id="customer_communicateresults"
-										name="customer_communicateresults" placeholder="沟通结果">
+										name="customer_communicateresults" style="width: 100%;height: 125px;" placeholder="沟通结果">
 									</textarea>
 								</div>
 							</div>
@@ -889,12 +899,12 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label for="" class="control-label col-md-4 col-sm-4"> <span>负责人姓名：</span>
+								<label for="" class="control-label col-md-4 col-sm-4"> <span>对接人姓名：</span>
 								</label>
 								<div class="col-md-8 col-sm-8">
 									<input type="text" class="form-control"
 										id="customer_person_edit" name="customer_person"
-										placeholder="负责人姓名">
+										placeholder="对接人姓名">
 								</div>
 							</div>
 							<div class="form-group">

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <script>
-    // 出入库记录查询参数
+    // 入(离)职记录查询参数
     search_type = 'none'
     search_repositoryID = ''
     search_start_date = null
@@ -14,7 +14,7 @@
         searchAction();
     })
 
-    // 仓库下拉框数据初始化
+    // 客户下拉框数据初始化
 	function repositoryOptionInit(){
 		$.ajax({
 			type : 'GET',
@@ -29,7 +29,7 @@
 			},
 			success : function(response){
 				$.each(response.rows,function(index,elem){
-					$('#search_repository_ID').append("<option value='" + elem.id + "'>" + elem.id +"号仓库</option>");
+					$('#search_repository_ID').append("<option value='" + elem.id + "'>" + elem.id +"号客户</option>");
 				})
 			},
 			error : function(response){
@@ -67,7 +67,7 @@
 									},
 									{
 										field : 'supplierOrCustomerName',
-										title : '供应商/客户名称'
+										title : '人才/客户名称'
 									},
 									{
 										field : 'goodsName',
@@ -75,7 +75,7 @@
 									},
 									{
 										field : 'repositoryID',
-										title : '出/入库仓库ID',
+										title : '离/入职客户ID',
 										//visible : false
 									},
 									{
@@ -172,16 +172,16 @@
 
 <div class="panel panel-default">
     <ol class="breadcrumb">
-        <li>业务流水</li>
+        <li>入(离)职记录</li>
     </ol>
     <div class="panel-body">
         <div class="row">
             <div class="col-md-3">
                 <form action="" class="form-inline">
                     <div class="form-group">
-                        <label class="form-label">仓库编号：</label>
+                        <label class="form-label">客户编号：</label>
                         <select class="form-control" id="search_repository_ID">
-                            <option value="">所有仓库</option>
+                            <option value="">所有客户</option>
                         </select>
                     </div>
                 </form>
@@ -191,8 +191,8 @@
                         <label class="form-label">记录过滤：</label>
                         <select name="" id="search_type" class="form-control">
                             <option value="all">显示所有</option>
-                            <option value="stockInOnly">仅显示入库记录</option>
-                            <option value="stockOutOnly">仅显示出库记录</option>
+                            <option value="stockInOnly">仅显示入职记录</option>
+                            <option value="stockOutOnly">仅显示离职记录</option>
                         </select>
                     </form>
                 </div>

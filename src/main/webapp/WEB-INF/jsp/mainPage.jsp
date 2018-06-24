@@ -92,6 +92,14 @@ pageEncoding="UTF-8"%>
                                            name="pagecomponent/storageManagement.jsp">人才查询</a>
                                     </li>
                                     <li class="list-group-item">
+                                        <a href="javascript:void(0)" id="" class="menu_item"
+                                           name="pagecomponent/stock-inManagement.jsp">人才入职</a>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <a href="javascript:void(0)" id="" class="menu_item"
+                                           name="pagecomponent/stock-outManagement.jsp">人才离职</a>
+                                    </li>
+                                    <li class="list-group-item">
                                         <a href="javascript:void(0)" id=""
                                            class="menu_item"
                                            name="pagecomponent/stockRecordManagement.jsp">入(离)职记录</a>
@@ -101,7 +109,7 @@ pageEncoding="UTF-8"%>
                         </div>
                     </div>
                 </div>
-                <div class="panel panel-default">
+                <%-- <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
                             <a href="#collapse2" data-toggle="collapse" data-parent="#accordion"
@@ -139,7 +147,7 @@ pageEncoding="UTF-8"%>
                             </shiro:hasRole>
                         </div>
                     </div>
-                </div>
+                </div> --%>
                 <shiro:hasRole name="systemAdmin">
                     <div class="panel panel-default">
                         <div class="panel-heading">
@@ -156,7 +164,7 @@ pageEncoding="UTF-8"%>
                                 <ul class="list-group">
                                     <li class="list-group-item">
                                         <a href="javascript:void(0)" id="" class="menu_item"
-                                           name="pagecomponent/repositoryAdminManagement.jsp">登录账号管理</a>
+                                           name="pagecomponent/repositoryAdminManagement.jsp">猎头账号管理</a>
                                     </li>
                                 </ul>
                             </div>
@@ -189,10 +197,10 @@ pageEncoding="UTF-8"%>
                                         <a href="javascript:void(0)" id="" class="menu_item"
                                            name="pagecomponent/goodsManagement.jsp">职位需求管理</a>
                                     </li>
-                                    <li class="list-group-item">
+                                    <!-- <li class="list-group-item">
                                         <a href="javascript:void(0)" id="" class="menu_item"
                                            name="pagecomponent/repositoryManagement.jsp">仓库信息管理</a>
-                                    </li>
+                                    </li> -->
                                 </ul>
                             </div>
                         </div>

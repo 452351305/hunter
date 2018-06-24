@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <script>
-	var stockin_repository = null;// 入库仓库编号
-	var stockin_supplier = null;// 入库供应商编号
-	var stockin_goods = null;// 入库货物编号
+	var stockin_repository = null;// 入库客户编号
+	var stockin_supplier = null;// 入库猎头编号
+	var stockin_goods = null;// 入库人才编号
 	var stockin_number = null;// 入库数量
 
-	var supplierCache = new Array();// 供应商信息缓存
-	var goodsCache = new Array();//货物信息缓存
+	var supplierCache = new Array();// 猎头信息缓存
+	var goodsCache = new Array();//人才信息缓存
 
 	$(function(){
 		repositorySelectorInit();
@@ -41,7 +41,7 @@
 		})
 	}
 
-	// 货物信息自动匹配
+	// 人才信息自动匹配
 	function goodsAutocomplete(){
 		$('#goods_input').autocomplete({
 			minLength : 0,
@@ -82,7 +82,7 @@
 		})
 	}
 
-	// 供应商信息自动匹配
+	// 猎头信息自动匹配
 	function supplierAutocomplete(){
 		$('#supplier_input').autocomplete({
 			minLength : 0,
@@ -122,7 +122,7 @@
 		})
 	}
 
-	// 填充供应商详细信息
+	// 填充猎头详细信息
 	function supplierInfoSet(supplierID){
 		var detailInfo;
 		$.each(supplierCache,function(index,elem){
@@ -164,7 +164,7 @@
 
 	}
 
-	// 填充货物详细信息
+	// 填充人才详细信息
 	function goodsInfoSet(goodsID){
 		var detailInfo;
 		$.each(goodsCache,function(index,elem){
@@ -213,7 +213,7 @@
 		});
 	}
 
-	// 仓库下拉列表初始化
+	// 客户下拉列表初始化
 	function repositorySelectorInit(){
 		$.ajax({
 			type : 'GET',
@@ -228,7 +228,7 @@
 			},
 			success : function(response){
 				$.each(response.rows,function(index,elem){
-					$('#repository_selector').append("<option value='" + elem.id + "'>" + elem.id +"号仓库</option>");
+					$('#repository_selector').append("<option value='" + elem.id + "'>" + elem.id +"号客户</option>");
 				});
 			},
 			error : function(response){
@@ -238,7 +238,7 @@
 		})
 	}
 
-	// 获取仓库当前库存量
+	// 获取客户当前库存量
 	function fetchStorage(){
 		$('#repository_selector').change(function(){
 			stockin_repository = $(this).val();
@@ -275,7 +275,7 @@
 		}
 	}
 
-	// 执行货物入库操作
+	// 执行人才入库操作
 	function stockInOption(){
 		$('#submit').click(function(){
 			// data validate
@@ -303,11 +303,11 @@
 					var append = '';
 					if(response.result == "success"){
 						type = 'success';
-						msg = '货物入库成功';
+						msg = '人才入库成功';
 						inputReset();
 					}else{
 						type = 'error';
-						msg = '货物入库失败'
+						msg = '人才入库失败'
 					}
 					shohunterg(type, msg, append);
 				},
@@ -344,7 +344,7 @@
 
 <div class="panel panel-default">
 	<ol class="breadcrumb">
-		<li>货物入库</li>
+		<li>人才入库</li>
 	</ol>
 	<div class="panel-body">
 		<div class="row">
@@ -354,8 +354,8 @@
 					<div class="col-md-10 col-sm-11">
 						<form action="" class="form-inline">
 							<div class="form-group">
-								<label for="" class="form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;供应商：</label>
-								<input type="text" class="form-control" id="supplier_input" placeholder="请输入供应商名称">
+								<label for="" class="form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;猎头：</label>
+								<input type="text" class="form-control" id="supplier_input" placeholder="请输入猎头名称">
 							</div>
 						</form>
 					</div>
@@ -367,8 +367,8 @@
 					<div class="col-md-10 col-sm-11">
 						<form action="" class="form-inline">
 							<div class="form-group">
-								<label for="" class="form-label">入库货物：</label>
-								<input type="text" class="form-control" id="goods_input" placeholder="请输入货物名称">
+								<label for="" class="form-label">入库人才：</label>
+								<input type="text" class="form-control" id="goods_input" placeholder="请输入人才名称">
 							</div>
 						</form>
 					</div>
@@ -392,7 +392,7 @@
 				<div class="row">
 					<div class="col-md-1 col-sm-1"></div>
 					<div class="col-md-10 col-sm-10">
-						<label for="" class="text-info">供应商信息</label>
+						<label for="" class="text-info">猎头信息</label>
 					</div>
 				</div>
 				<div class="row">
@@ -401,7 +401,7 @@
 						<div class="col-md-6 col-sm-6">
 							<div style="margin-top:5px">
 								<div class="col-md-6 col-sm-6">
-									<span for="" class="pull-right">供应商ID：</span>
+									<span for="" class="pull-right">猎头ID：</span>
 								</div>
 								<div class="col-md-6 col-sm-6">
 									<span id="info_supplier_ID">-</span>
@@ -427,7 +427,7 @@
 						<div class="col-md-6 col-sm-6  visible-md visible-lg">
 							<div style="margin-top:5px">
 								<div class="col-md-6 col-sm-6">
-									<span for="" class="pull-right">供应商名：</span>
+									<span for="" class="pull-right">猎头名：</span>
 								</div>
 								<div class="col-md-6 col-sm-6">
 									<span id="info_supplier_name">-</span>
@@ -458,7 +458,7 @@
 				<div class="row">
 					<div class="col-md-1 col-sm-1"></div>
 					<div class="col-md-11 col-sm-11">
-						<label for="" class="text-info">货物信息</label>
+						<label for="" class="text-info">人才信息</label>
 					</div>
 				</div>
 				<div class="row">
@@ -467,7 +467,7 @@
 						<div class="col-md-6 col-sm-6">
 							<div style="margin-top:5px">
 								<div class="col-md-6 col-sm-6">
-									<span for="" class="pull-right">货物ID：</span>
+									<span for="" class="pull-right">人才ID：</span>
 								</div>
 								<div class="col-md-6 col-sm-6">
 									<span id="info_goods_ID">-</span>
@@ -475,7 +475,7 @@
 							</div>
 							<div style="margin-top:5px">
 								<div class="col-md-6 col-sm-6">
-									<span for="" class="pull-right">货物类型：</span>
+									<span for="" class="pull-right">人才类型：</span>
 								</div>
 								<div class="col-md-6 col-sm-6">
 									<span id="info_goods_type">-</span>
@@ -483,7 +483,7 @@
 							</div>
 							<div style="margin-top:5px">
 								<div class="col-md-6 col-sm-6">
-									<span for="" class="pull-right">货物名：</span>
+									<span for="" class="pull-right">人才名：</span>
 								</div>
 								<div class="col-md-6 col-sm-6">
 									<span id="info_goods_name">-</span>
@@ -493,7 +493,7 @@
 						<div class="col-md-6 col-sm-6">
 							<div style="margin-top:5px">
 								<div class="col-md-6 col-sm-6">
-									<span for="" class="pull-right">货物规格：</span>
+									<span for="" class="pull-right">人才规格：</span>
 								</div>
 								<div class="col-md-6 col-sm-6">
 									<span id="info_goods_size">-</span>
@@ -501,7 +501,7 @@
 							</div>
 							<div style="margin-top:5px">
 								<div class="col-md-6 col-sm-6">
-									<span for="" class="pull-right">货物价值：</span>
+									<span for="" class="pull-right">人才价值：</span>
 								</div>
 								<div class="col-md-6 col-sm-6">
 									<span id="info_goods_value">-</span>
@@ -519,7 +519,7 @@
                     <div class="col-md-10 col-sm-11">
                         <form action="" class="form-inline">
                             <div class="form-group">
-                                <label for="" class="form-label">入库仓库：</label>
+                                <label for="" class="form-label">入库客户：</label>
                                 <select name="" id="repository_selector" class="form-control">
                                 </select>
                             </div>
@@ -528,7 +528,7 @@
                 </div>
             </div>
         </div>
-		<div class="row" style="margin-top:20px">
+		<!-- <div class="row" style="margin-top:20px">
 			<div class="col-md-6 col-sm-6">
 				<div class="row">
 					<div class="col-md-1 col-sm-1"></div>
@@ -545,7 +545,7 @@
 					</div>
 				</div>
 			</div>
-		</div>
+		</div> -->
 		<div class="row" style="margin-top:80px"></div>
 	</div>
 	<div class="panel-footer">

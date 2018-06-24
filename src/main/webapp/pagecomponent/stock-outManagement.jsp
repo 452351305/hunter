@@ -40,7 +40,7 @@
 		});
 	}
 
-	//货物信息自动匹配
+	//人才信息自动匹配
 	function goodsAutocomplete(){
 		$('#goods_input').autocomplete({
 			minLength : 0,
@@ -208,7 +208,7 @@
 		});
 	}
 
-	//仓库下拉列表初始化
+	//猎头下拉列表初始化
 	function repositorySelectorInit(){
 		$.ajax({
 			type : 'GET',
@@ -223,7 +223,7 @@
 			},
 			success : function(response){
 				$.each(response.rows,function(index,elem){
-					$('#repository_selector').append("<option value='" + elem.id + "'>" + elem.id +"号仓库</option>");
+					$('#repository_selector').append("<option value='" + elem.id + "'>" + elem.id +"号猎头</option>");
 				});
 			},
 			error : function(response){
@@ -269,7 +269,7 @@
 		}
 	}
 
-	//执行货物出库操作
+	//执行人才出库操作
 	function stockoutOperation(){
 		$('#submit').click(function(){
 			// data validate
@@ -297,11 +297,11 @@
 					var append = '';
 					if(response.result == "success"){
 						type = 'success';
-						msg = '货物出库成功';
+						msg = '人才出库成功';
 						inputReset();
 					}else{
 						type = 'error';
-						msg = '货物出库失败'
+						msg = '人才出库失败'
 					}
 					shohunterg(type, msg, append);
 				},
@@ -336,7 +336,7 @@
 
 <div class="panel panel-default">
 	<ol class="breadcrumb">
-		<li>货物出库</li>
+		<li>人才出库</li>
 	</ol>
 	<div class="panel-body">
 		<div class="row">
@@ -346,8 +346,8 @@
 					<div class="col-md-10 col-sm-11">
 						<form action="" class="form-inline">
 							<div class="form-group">
-								<label for="" class="form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;客户：</label>
-								<input type="text" class="form-control" id="customer_input" placeholder="请输入客户名称">
+								<label for="" class="form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;猎头：</label>
+								<input type="text" class="form-control" id="customer_input" placeholder="请输入猎头名称">
 							</div>
 						</form>
 					</div>
@@ -359,8 +359,8 @@
 					<div class="col-md-10 col-sm-11">
 						<form action="" class="form-inline">
 							<div class="form-group">
-								<label for="" class="form-label">出库货物：</label>
-								<input type="text" class="form-control" id="goods_input" placeholder="请输入货物名称">
+								<label for="" class="form-label">出库人才：</label>
+								<input type="text" class="form-control" id="goods_input" placeholder="请输入人才名称">
 							</div>
 						</form>
 					</div>
@@ -384,7 +384,7 @@
 				<div class="row">
 					<div class="col-md-1"></div>
 					<div class="col-md-10">
-						<label for="" class="text-info">客户信息</label>
+						<label for="" class="text-info">猎头信息</label>
 					</div>
 				</div>
 				<div class="row">
@@ -393,7 +393,7 @@
 						<div class="col-md-6">
 							<div style="margin-top:5px">
 								<div class="col-md-6">
-									<span for="" class="pull-right">客户ID：</span>
+									<span for="" class="pull-right">猎头ID：</span>
 								</div>
 								<div class="col-md-6">
 									<span id="info_customer_ID">-</span>
@@ -419,7 +419,7 @@
 						<div class="col-md-6">
 							<div style="margin-top:5px">
 								<div class="col-md-6">
-									<span for="" class="pull-right">客户名：</span>
+									<span for="" class="pull-right">猎头名：</span>
 								</div>
 								<div class="col-md-6">
 									<span id="info_customer_name">-</span>
@@ -450,7 +450,7 @@
 				<div class="row">
 					<div class="col-md-1 col-sm-1"></div>
 					<div class="col-md-11 col-sm-11">
-						<label for="" class="text-info">货物信息</label>
+						<label for="" class="text-info">人才信息</label>
 					</div>
 				</div>
 				<div class="row">
@@ -459,7 +459,7 @@
 						<div class="col-md-6">
 							<div style="margin-top:5px">
 								<div class="col-md-6">
-									<span for="" class="pull-right">货物ID：</span>
+									<span for="" class="pull-right">人才ID：</span>
 								</div>
 								<div class="col-md-6">
 									<span id="info_goods_ID">-</span>
@@ -467,7 +467,7 @@
 							</div>
 							<div style="margin-top:5px">
 								<div class="col-md-6">
-									<span for="" class="pull-right">货物类型：</span>
+									<span for="" class="pull-right">人才类型：</span>
 								</div>
 								<div class="col-md-6">
 									<span id="info_goods_type">-</span>
@@ -475,7 +475,7 @@
 							</div>
 							<div style="margin-top:5px">
 								<div class="col-md-6">
-									<span for="" class="pull-right">货物名：</span>
+									<span for="" class="pull-right">人才名：</span>
 								</div>
 								<div class="col-md-6">
 									<span id="info_goods_name">-</span>
@@ -485,7 +485,7 @@
 						<div class="col-md-6">
 							<div style="margin-top:5px">
 								<div class="col-md-6">
-									<span for="" class="pull-right">货物规格：</span>
+									<span for="" class="pull-right">人才规格：</span>
 								</div>
 								<div class="col-md-6">
 									<span id="info_goods_size">-</span>
@@ -493,7 +493,7 @@
 							</div>
 							<div style="margin-top:5px">
 								<div class="col-md-6">
-									<span for="" class="pull-right">货物价值：</span>
+									<span for="" class="pull-right">人才价值：</span>
 								</div>
 								<div class="col-md-6">
 									<span id="info_goods_value">-</span>
@@ -511,9 +511,9 @@
 					<div class="col-md-10 col-sm-11">
 						<form action="" class="form-inline">
 							<div class="form-group">
-								<label for="" class="form-label">出库仓库：</label>
+								<label for="" class="form-label">出库客户：</label>
 								<!--
-								<input type="text" class="form-control" placeholder="仓库编号">
+								<input type="text" class="form-control" placeholder="猎头编号">
 							-->
 								<select name="" id="repository_selector" class="form-control">
 								</select>
@@ -523,7 +523,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="row" style="margin-top:20px">
+		<!-- <div class="row" style="margin-top:20px">
 			<div class="col-md-6 col-sm-6">
 				<div class="row">
 					<div class="col-md-1 col-sm-1"></div>
@@ -540,7 +540,7 @@
 					</div>
 				</div>
 			</div>
-		</div>
+		</div> -->
 		<div class="row" style="margin-top:80px"></div>
 	</div>
 	<div class="panel-footer">

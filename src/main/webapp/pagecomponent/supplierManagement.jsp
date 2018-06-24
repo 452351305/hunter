@@ -27,12 +27,12 @@
 			if (type == "所有") {
 				$("#search_input").attr("readOnly", "true");
 				search_type_supplier = "searchAll";
-			} else if (type == "供应商ID") {
+			} else if (type == "员工ID") {
 				$("#search_input").removeAttr("readOnly");
 				search_type_supplier = "searchByID";
-			} else if (type == "供应商名称") {
+			} else if (type == "员工姓名") {
 				$("#search_input").removeAttr("readOnly");
-				search_type_supplier = "searchByName";
+				search_type_supplier = "searchByPerson";
 			} else {
 				$("#search_input").removeAttr("readOnly");
 			}
@@ -73,13 +73,13 @@
 									//sortable: true
 									},
 									{
-										field : 'name',
+										field : 'personInCharge',
 										title : '员工姓名'
+										//visible : false
 									},
 									{
-										field : 'personInCharge',
-										title : '负责人',
-										visible : false
+										field : 'sex',
+										title : '员工性别'
 									},
 									{
 										field : 'tel',
@@ -146,14 +146,14 @@
 
 		// load info
 		$('#supplier_form_edit').bootstrapValidator("resetForm", true);
-		$('#supplier_name_edit').val(row.name);
+		$('#supplier_sex_edit').val(row.sex);
 		$('#supplier_person_edit').val(row.personInCharge);
 		$('#supplier_tel_edit').val(row.tel);
 		$('#supplier_email_edit').val(row.email);
 		$('#supplier_address_edit').val(row.address);
 	}
 
-	// 添加供应商模态框数据校验
+	// 添加员工模态框数据校验
 	function bootstrapValidatorInit() {
 		$("#supplier_form,#supplier_form_edit").bootstrapValidator({
 			message : 'This is not valid',
@@ -164,24 +164,24 @@
 			},
 			excluded : [ ':disabled' ],
 			fields : {
-				supplier_name : {
+				supplier_sex : {
 					validators : {
 						notEmpty : {
-							message : '供应商名称不能为空'
+							message : '性别不能为空'
 						}
 					}
 				},
 				supplier_tel : {
 					validators : {
 						notEmpty : {
-							message : '供应商电话不能为空'
+							message : '联系电话不能为空'
 						}
 					}
 				},
 				supplier_email : {
 					validators : {
 						notEmpty : {
-							message : '供应商E-mail不能为空'
+							message : 'E-mail不能为空'
 						},
 						regexp : {
 							regexp : '^[^@\\s]+@([^@\\s]+\\.)+[^@\\s]+$',
@@ -192,14 +192,14 @@
 				supplier_address : {
 					validators : {
 						notEmpty : {
-							message : '供应商地址不能为空'
+							message : '住址不能为空'
 						}
 					}
 				},
 				supplier_person : {
 					validators : {
 						notEmpty : {
-							message : '供应商负责人不能为空'
+							message : '员工姓名不能为空'
 						}
 					}
 				}
@@ -207,7 +207,7 @@
 		})
 	}
 
-	// 编辑供应商信息
+	// 编辑员工信息
 	function editSupplierAction() {
 		$('#edit_modal_submit').click(
 				function() {
@@ -220,7 +220,7 @@
 
 					var data = {
 						id : selectID,
-						name : $('#supplier_name_edit').val(),
+						sex : $('#supplier_sex_edit').val(),
 						personInCharge : $('#supplier_person_edit').val(),
 						tel : $('#supplier_tel_edit').val(),
 						email : $('#supplier_email_edit').val(),
@@ -241,10 +241,10 @@
 							var append = '';
 							if (response.result == "success") {
 								type = "success";
-								msg = "供应商信息更新成功";
+								msg = "员工信息更新成功";
 							} else if (response.result == "error") {
 								type = "error";
-								msg = "供应商信息更新失败"
+								msg = "员工信息更新失败"
 							}
 							shohunterg(type, msg, append);
 							tableRefresh();
@@ -258,7 +258,7 @@
 				});
 	}
 
-	// 刪除供应商信息
+	// 刪除员工信息
 	function deleteSupplierAction(){
 		$('#delete_confirm').click(function(){
 			var data = {
@@ -279,10 +279,10 @@
 					var append = '';
 					if(response.result == "success"){
 						type = "success";
-						msg = "供应商信息删除成功";
+						msg = "员工信息删除成功";
 					}else{
 						type = "error";
-						msg = "供应商信息删除失败";
+						msg = "员工信息删除失败";
 					}
 					shohunterg(type, msg, append);
 					tableRefresh();
@@ -298,7 +298,7 @@
 		})
 	}
 
-	// 添加供应商信息
+	// 添加员工信息
 	function addSupplierAction() {
 		$('#add_supplier').click(function() {
 			$('#add_modal').modal("show");
@@ -306,7 +306,7 @@
 
 		$('#add_modal_submit').click(function() {
 			var data = {
-				name : $('#supplier_name').val(),
+				sex : $('#supplier_sex').val(),
 				personInCharge : $('#supplier_person').val(),
 				tel : $('#supplier_tel').val(),
 				email : $('#supplier_email').val(),
@@ -326,16 +326,16 @@
 					var append = '';
 					if (response.result == "success") {
 						type = "success";
-						msg = "供应商添加成功";
+						msg = "员工添加成功";
 					} else if (response.result == "error") {
 						type = "error";
-						msg = "供应商添加失败";
+						msg = "员工添加失败";
 					}
 					shohunterg(type, msg, append);
 					tableRefresh();
 
 					// reset
-					$('#supplier_name').val("");
+					$('#supplier_sex').val("");
 					$('#supplier_person').val("");
 					$('#supplier_tel').val("");
 					$('#supplier_email').val("");
@@ -354,7 +354,7 @@
 	var import_step = 1;
 	var import_start = 1;
 	var import_end = 3;
-	// 导入供应商信息
+	// 导入员工信息
 	function importSupplierAction() {
 		$('#import_supplier').click(function() {
 			$('#import_modal').modal("show");
@@ -406,8 +406,8 @@
 				success : function(data, status){
 					var total = 0;
 					var available = 0;
-					var msg1 = "供应商信息导入成功";
-					var msg2 = "供应商信息导入失败";
+					var msg1 = "员工信息导入成功";
+					var msg2 = "员工信息导入失败";
 					var info;
 
 					$('#import_progress_bar').addClass("hide");
@@ -438,7 +438,7 @@
 		})
 	}
 
-	// 导出供应商信息
+	// 导出员工信息
 	function exportSupplierAction() {
 		$('#export_supplier').click(function() {
 			$('#export_modal').modal("show");
@@ -455,7 +455,7 @@
 		})
 	}
 
-	// 导入供应商模态框重置
+	// 导入员工模态框重置
 	function importModalReset(){
 		var i;
 		for(i = import_start; i <= import_end; i++){
@@ -497,7 +497,7 @@
 </script>
 <div class="panel panel-default">
 	<ol class="breadcrumb">
-		<li>供应商信息管理</li>
+		<li>员工信息管理</li>
 	</ol>
 	<div class="panel-body">
 		<div class="row">
@@ -508,8 +508,8 @@
 						<span id="search_type">查询方式</span> <span class="caret"></span>
 					</button>
 					<ul class="dropdown-menu" role="menu">
-						<li><a href="javascript:void(0)" class="dropOption">供应商ID</a></li>
-						<li><a href="javascript:void(0)" class="dropOption">供应商名称</a></li>
+						<li><a href="javascript:void(0)" class="dropOption">员工ID</a></li>
+						<li><a href="javascript:void(0)" class="dropOption">员工姓名</a></li>
 						<li><a href="javascript:void(0)" class="dropOption">所有</a></li>
 					</ul>
 				</div>
@@ -518,7 +518,7 @@
 				<div>
 					<div class="col-md-3 col-sm-4">
 						<input id="search_input" type="text" class="form-control"
-							placeholder="供应商ID">
+							placeholder="员工ID">
 					</div>
 					<div class="col-md-2 col-sm-3">
 						<button id="search_button" class="btn btn-success">
@@ -532,7 +532,7 @@
 		<div class="row" style="margin-top: 25px">
 			<div class="col-md-5">
 				<button class="btn btn-sm btn-default" id="add_supplier">
-					<span class="glyphicon glyphicon-plus"></span> <span>添加供应商</span>
+					<span class="glyphicon glyphicon-plus"></span> <span>添加员工</span>
 				</button>
 				<button class="btn btn-sm btn-default" id="import_supplier">
 					<span class="glyphicon glyphicon-import"></span> <span>导入</span>
@@ -552,7 +552,7 @@
 	</div>
 </div>
 
-<!-- 添加供应商信息模态框 -->
+<!-- 添加员工信息模态框 -->
 <div id="add_modal" class="modal fade" table-index="-1" role="dialog"
 	aria-labelledby="myModalLabel" aria-hidden="true"
 	data-backdrop="static">
@@ -561,7 +561,7 @@
 			<div class="modal-header">
 				<button class="close" type="button" data-dismiss="modal"
 					aria-hidden="true">&times;</button>
-				<h4 class="modal-title" id="myModalLabel">添加供应商信息</h4>
+				<h4 class="modal-title" id="myModalLabel">添加员工信息</h4>
 			</div>
 			<div class="modal-body">
 				<!-- 模态框的内容 -->
@@ -571,19 +571,21 @@
 						<form class="form-horizontal" role="form" id="supplier_form"
 							style="margin-top: 25px">
 							<div class="form-group">
-								<label for="" class="control-label col-md-4 col-sm-4"> <span>供应商名称：</span>
+								<label for="" class="control-label col-md-4 col-sm-4"> <span>员工性别：</span>
 								</label>
 								<div class="col-md-8 col-sm-8">
-									<input type="text" class="form-control" id="supplier_name"
-										name="supplier_name" placeholder="供应商名称">
+									<select name="supplier_sex" class="form-control" id="supplier_sex">
+										<option value="男">男性</option>
+										<option value="女">女性</option>
+									</select>
 								</div>
 							</div>
 							<div class="form-group">
-								<label for="" class="control-label col-md-4 col-sm-4"> <span>负责人姓名：</span>
+								<label for="" class="control-label col-md-4 col-sm-4"> <span>员工姓名：</span>
 								</label>
 								<div class="col-md-8 col-sm-8">
 									<input type="text" class="form-control" id="supplier_person"
-										name="supplier_person" placeholder="负责人姓名">
+										name="supplier_person" placeholder="员工姓名">
 								</div>
 							</div>
 							<div class="form-group">
@@ -627,7 +629,7 @@
 	</div>
 </div>
 
-<!-- 导入供应商信息模态框 -->
+<!-- 导入员工信息模态框 -->
 <div class="modal fade" id="import_modal" table-index="-1" role="dialog"
 	aria-labelledby="myModalLabel" aria-hidden="true"
 	data-backdrop="static">
@@ -636,7 +638,7 @@
 			<div class="modal-header">
 				<button class="close" type="button" data-dismiss="modal"
 					aria-hidden="true">&times;</button>
-				<h4 class="modal-title" id="myModalLabel">导入供应商信息</h4>
+				<h4 class="modal-title" id="myModalLabel">导入员工信息</h4>
 			</div>
 			<div class="modal-body">
 				<div id="step1">
@@ -644,7 +646,7 @@
 						<div class="col-md-1 col-sm-1"></div>
 						<div class="col-md-10 col-sm-10">
 							<div>
-								<h4>点击下面的下载按钮，下载供应商信息电子表格</h4>
+								<h4>点击下面的下载按钮，下载员工信息电子表格</h4>
 							</div>
 							<div style="margin-top: 30px; margin-buttom: 15px">
 								<a class="btn btn-info"
@@ -661,7 +663,7 @@
 						<div class="col-md-1 col-sm-1"></div>
 						<div class="col-md-10 col-sm-10">
 							<div>
-								<h4>请按照学生信息电子表格中指定的格式填写需要添加的一个或多个供应商信息</h4>
+								<h4>请按照学生信息电子表格中指定的格式填写需要添加的一个或多个员工信息</h4>
 							</div>
 							<div class="alert alert-info"
 								style="margin-top: 10px; margin-buttom: 30px">
@@ -676,7 +678,7 @@
 						<div class="col-md-8 col-sm-10">
 							<div>
 								<div>
-									<h4>请点击下面上传文件按钮，上传填写好的供应商信息电子表格</h4>
+									<h4>请点击下面上传文件按钮，上传填写好的员工信息电子表格</h4>
 								</div>
 								<div style="margin-top: 30px; margin-buttom: 15px">
 									<span class="btn btn-info btn-file"> <span> <span
@@ -753,7 +755,7 @@
 	</div>
 </div>
 
-<!-- 导出供应商信息模态框 -->
+<!-- 导出员工信息模态框 -->
 <div class="modal fade" id="export_modal" table-index="-1" role="dialog"
 	aria-labelledby="myModalLabel" aria-hidden="true"
 	data-backdrop="static">
@@ -762,7 +764,7 @@
 			<div class="modal-header">
 				<button class="close" type="button" data-dismiss="modal"
 					aria-hidden="true">&times;</button>
-				<h4 class="modal-title" id="myModalLabel">导出供应商信息</h4>
+				<h4 class="modal-title" id="myModalLabel">导出员工信息</h4>
 			</div>
 			<div class="modal-body">
 				<div class="row">
@@ -771,8 +773,8 @@
 							style="width: 70px; height: 70px; margin-top: 20px;">
 					</div>
 					<div class="col-md-8 col-sm-8">
-						<h3>是否确认导出供应商信息</h3>
-						<p>(注意：请确定要导出的供应商信息，导出的内容为当前列表的搜索结果)</p>
+						<h3>是否确认导出员工信息</h3>
+						<p>(注意：请确定要导出的员工信息，导出的内容为当前列表的搜索结果)</p>
 					</div>
 				</div>
 			</div>
@@ -805,8 +807,8 @@
 							style="width: 70px; height: 70px; margin-top: 20px;">
 					</div>
 					<div class="col-md-8 col-sm-8">
-						<h3>是否确认删除该条供应商信息</h3>
-						<p>(注意：若该供应商已经有仓库入库记录，则该供应商信息将不能删除成功。如需删除该供应商的信息，请先删除该供应商的入库记录)</p>
+						<h3>是否确认删除该员工信息</h3>
+						<p>(注意：若该员工已经有登录账号记录，则该员工信息将不能删除成功。如需删除该员工的信息，请先删除该员工的登录账号记录)</p>
 					</div>
 				</div>
 			</div>
@@ -822,7 +824,7 @@
 	</div>
 </div>
 
-<!-- 编辑供应商信息模态框 -->
+<!-- 编辑员工信息模态框 -->
 <div id="edit_modal" class="modal fade" table-index="-1" role="dialog"
 	aria-labelledby="myModalLabel" aria-hidden="true"
 	data-backdrop="static">
@@ -831,7 +833,7 @@
 			<div class="modal-header">
 				<button class="close" type="button" data-dismiss="modal"
 					aria-hidden="true">&times;</button>
-				<h4 class="modal-title" id="myModalLabel">编辑供应商信息</h4>
+				<h4 class="modal-title" id="myModalLabel">编辑员工信息</h4>
 			</div>
 			<div class="modal-body">
 				<!-- 模态框的内容 -->
@@ -841,11 +843,13 @@
 						<form class="form-horizontal" role="form" id="supplier_form_edit"
 							style="margin-top: 25px">
 							<div class="form-group">
-								<label for="" class="control-label col-md-4 col-sm-4"> <span>供应商名称：</span>
+								<label for="" class="control-label col-md-4 col-sm-4"> <span>员工性别：</span>
 								</label>
 								<div class="col-md-8 col-sm-8">
-									<input type="text" class="form-control" id="supplier_name_edit"
-										name="supplier_name" placeholder="供应商名称">
+									<select name="supplier_sex" class="form-control" id="supplier_sex_edit">
+										<option value="男">男性</option>
+										<option value="女">女性</option>
+									</select>
 								</div>
 							</div>
 							<div class="form-group">
