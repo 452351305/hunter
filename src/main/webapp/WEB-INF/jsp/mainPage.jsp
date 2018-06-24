@@ -18,6 +18,8 @@ pageEncoding="UTF-8"%>
           href="${pageContext.request.contextPath}/css/jquery.mloading.css">
     <link rel="stylesheet" type="text/css"
           href="${pageContext.request.contextPath}/css/mainPage.css">
+    <link rel="icon" href="${pageContext.request.contextPath}/pagecomponent/images/favicon.ico" mce_href="${pageContext.request.contextPath}/pagecomponent/images/favicon.ico" type="image/x-icon">  
+	<link rel="shortcut icon" href="${pageContext.request.contextPath}/pagecomponent/images/favicon.ico" mce_href="${pageContext.request.contextPath}/pagecomponent/images/favicon.ico" type="image/x-icon"> 
 </head>
 <body>
 

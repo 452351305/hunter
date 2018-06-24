@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50717
 File Encoding         : 65001
 
-Date: 2018-04-19 16:33:13
+Date: 2018-06-24 15:11:26
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -27,7 +27,7 @@ CREATE TABLE `hunter_access_record` (
   `ACCESS_TIME` datetime NOT NULL,
   `ACCESS_IP` varchar(45) NOT NULL,
   PRIMARY KEY (`RECORD_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=96 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of hunter_access_record
@@ -35,6 +35,98 @@ CREATE TABLE `hunter_access_record` (
 INSERT INTO `hunter_access_record` VALUES ('1', '1001', 'admin', 'login', '2018-04-19 16:18:43', '0:0:0:0:0:0:0:1');
 INSERT INTO `hunter_access_record` VALUES ('2', '1001', 'admin', 'login', '2018-04-19 16:20:52', '0:0:0:0:0:0:0:1');
 INSERT INTO `hunter_access_record` VALUES ('3', '1001', 'admin', 'login', '2018-04-19 16:31:14', '0:0:0:0:0:0:0:1');
+INSERT INTO `hunter_access_record` VALUES ('4', '1001', 'admin', 'login', '2018-04-19 16:36:29', '0:0:0:0:0:0:0:1');
+INSERT INTO `hunter_access_record` VALUES ('5', '1001', 'admin', 'login', '2018-05-04 22:15:41', '0:0:0:0:0:0:0:1');
+INSERT INTO `hunter_access_record` VALUES ('6', '1001', 'admin', 'login', '2018-05-04 22:19:57', '0:0:0:0:0:0:0:1');
+INSERT INTO `hunter_access_record` VALUES ('7', '1001', 'admin', 'login', '2018-05-04 22:23:08', '0:0:0:0:0:0:0:1');
+INSERT INTO `hunter_access_record` VALUES ('8', '1001', 'admin', 'logout', '2018-05-04 22:40:13', '0:0:0:0:0:0:0:1');
+INSERT INTO `hunter_access_record` VALUES ('9', '1020', '邹宏林', 'login', '2018-05-04 22:40:31', '0:0:0:0:0:0:0:1');
+INSERT INTO `hunter_access_record` VALUES ('10', '1020', '邹宏林', 'logout', '2018-05-04 22:41:17', '0:0:0:0:0:0:0:1');
+INSERT INTO `hunter_access_record` VALUES ('11', '1001', 'admin', 'login', '2018-05-04 22:41:29', '0:0:0:0:0:0:0:1');
+INSERT INTO `hunter_access_record` VALUES ('12', '1001', 'admin', 'logout', '2018-05-04 22:56:50', '0:0:0:0:0:0:0:1');
+INSERT INTO `hunter_access_record` VALUES ('13', '1020', '邹宏林', 'login', '2018-05-04 22:57:04', '0:0:0:0:0:0:0:1');
+INSERT INTO `hunter_access_record` VALUES ('14', '1020', '邹宏林', 'logout', '2018-05-04 22:57:12', '0:0:0:0:0:0:0:1');
+INSERT INTO `hunter_access_record` VALUES ('15', '1001', 'admin', 'login', '2018-05-04 22:57:29', '0:0:0:0:0:0:0:1');
+INSERT INTO `hunter_access_record` VALUES ('16', '1001', 'admin', 'logout', '2018-05-04 23:13:08', '0:0:0:0:0:0:0:1');
+INSERT INTO `hunter_access_record` VALUES ('17', '1001', 'admin', 'login', '2018-05-04 23:14:16', '0:0:0:0:0:0:0:1');
+INSERT INTO `hunter_access_record` VALUES ('18', '1001', 'admin', 'login', '2018-05-04 23:35:20', '0:0:0:0:0:0:0:1');
+INSERT INTO `hunter_access_record` VALUES ('19', '1001', 'admin', 'logout', '2018-05-04 23:35:31', '0:0:0:0:0:0:0:1');
+INSERT INTO `hunter_access_record` VALUES ('20', '1001', 'admin', 'login', '2018-05-04 23:35:37', '0:0:0:0:0:0:0:1');
+INSERT INTO `hunter_access_record` VALUES ('21', '1001', 'admin', 'login', '2018-05-12 13:43:34', '0:0:0:0:0:0:0:1');
+INSERT INTO `hunter_access_record` VALUES ('22', '1001', 'admin', 'login', '2018-05-12 13:56:02', '0:0:0:0:0:0:0:1');
+INSERT INTO `hunter_access_record` VALUES ('23', '1001', 'admin', 'logout', '2018-05-12 15:46:01', '0:0:0:0:0:0:0:1');
+INSERT INTO `hunter_access_record` VALUES ('24', '1001', 'admin', 'login', '2018-05-12 15:46:12', '0:0:0:0:0:0:0:1');
+INSERT INTO `hunter_access_record` VALUES ('25', '1001', 'admin', 'login', '2018-05-12 16:21:19', '0:0:0:0:0:0:0:1');
+INSERT INTO `hunter_access_record` VALUES ('26', '1001', 'admin', 'login', '2018-05-19 20:18:54', '0:0:0:0:0:0:0:1');
+INSERT INTO `hunter_access_record` VALUES ('27', '1001', 'admin', 'logout', '2018-05-19 20:35:52', '0:0:0:0:0:0:0:1');
+INSERT INTO `hunter_access_record` VALUES ('28', '1001', 'admin', 'login', '2018-05-19 20:36:11', '0:0:0:0:0:0:0:1');
+INSERT INTO `hunter_access_record` VALUES ('29', '1001', 'admin', 'logout', '2018-05-19 20:41:38', '0:0:0:0:0:0:0:1');
+INSERT INTO `hunter_access_record` VALUES ('30', '1001', 'admin', 'login', '2018-05-19 20:41:44', '0:0:0:0:0:0:0:1');
+INSERT INTO `hunter_access_record` VALUES ('31', '1001', 'admin', 'login', '2018-05-19 20:42:59', '0:0:0:0:0:0:0:1');
+INSERT INTO `hunter_access_record` VALUES ('32', '1001', 'admin', 'login', '2018-05-19 20:43:57', '0:0:0:0:0:0:0:1');
+INSERT INTO `hunter_access_record` VALUES ('33', '1001', 'admin', 'login', '2018-05-19 21:36:50', '0:0:0:0:0:0:0:1');
+INSERT INTO `hunter_access_record` VALUES ('34', '1001', 'admin', 'login', '2018-05-19 21:40:34', '0:0:0:0:0:0:0:1');
+INSERT INTO `hunter_access_record` VALUES ('35', '1001', 'admin', 'login', '2018-05-19 21:45:53', '0:0:0:0:0:0:0:1');
+INSERT INTO `hunter_access_record` VALUES ('36', '1001', 'admin', 'login', '2018-05-19 22:03:28', '0:0:0:0:0:0:0:1');
+INSERT INTO `hunter_access_record` VALUES ('37', '1001', 'admin', 'login', '2018-05-19 22:05:52', '0:0:0:0:0:0:0:1');
+INSERT INTO `hunter_access_record` VALUES ('38', '1001', 'admin', 'login', '2018-05-19 22:10:51', '0:0:0:0:0:0:0:1');
+INSERT INTO `hunter_access_record` VALUES ('39', '1001', 'admin', 'login', '2018-05-19 22:16:10', '0:0:0:0:0:0:0:1');
+INSERT INTO `hunter_access_record` VALUES ('40', '1001', 'admin', 'login', '2018-05-19 22:23:54', '0:0:0:0:0:0:0:1');
+INSERT INTO `hunter_access_record` VALUES ('41', '1001', 'admin', 'login', '2018-05-19 22:28:29', '0:0:0:0:0:0:0:1');
+INSERT INTO `hunter_access_record` VALUES ('42', '1001', 'admin', 'login', '2018-05-19 22:31:48', '0:0:0:0:0:0:0:1');
+INSERT INTO `hunter_access_record` VALUES ('43', '1001', 'admin', 'login', '2018-05-23 12:38:39', '0:0:0:0:0:0:0:1');
+INSERT INTO `hunter_access_record` VALUES ('44', '1001', 'admin', 'login', '2018-06-02 21:25:36', '0:0:0:0:0:0:0:1');
+INSERT INTO `hunter_access_record` VALUES ('45', '1001', 'admin', 'login', '2018-06-02 21:27:26', '0:0:0:0:0:0:0:1');
+INSERT INTO `hunter_access_record` VALUES ('46', '1001', 'admin', 'login', '2018-06-02 21:37:53', '0:0:0:0:0:0:0:1');
+INSERT INTO `hunter_access_record` VALUES ('47', '1001', 'admin', 'login', '2018-06-02 22:25:14', '0:0:0:0:0:0:0:1');
+INSERT INTO `hunter_access_record` VALUES ('48', '1001', 'admin', 'login', '2018-06-02 22:31:31', '0:0:0:0:0:0:0:1');
+INSERT INTO `hunter_access_record` VALUES ('49', '1001', 'admin', 'login', '2018-06-02 22:46:55', '0:0:0:0:0:0:0:1');
+INSERT INTO `hunter_access_record` VALUES ('50', '1001', 'admin', 'login', '2018-06-02 23:06:05', '0:0:0:0:0:0:0:1');
+INSERT INTO `hunter_access_record` VALUES ('51', '1001', 'admin', 'login', '2018-06-19 20:29:05', '0:0:0:0:0:0:0:1');
+INSERT INTO `hunter_access_record` VALUES ('52', '1001', 'admin', 'login', '2018-06-19 21:40:46', '0:0:0:0:0:0:0:1');
+INSERT INTO `hunter_access_record` VALUES ('53', '1001', 'admin', 'logout', '2018-06-19 21:57:38', '0:0:0:0:0:0:0:1');
+INSERT INTO `hunter_access_record` VALUES ('54', '1001', 'admin', 'login', '2018-06-19 21:57:46', '0:0:0:0:0:0:0:1');
+INSERT INTO `hunter_access_record` VALUES ('55', '1001', 'admin', 'login', '2018-06-19 22:19:50', '0:0:0:0:0:0:0:1');
+INSERT INTO `hunter_access_record` VALUES ('56', '1001', 'admin', 'login', '2018-06-19 22:21:23', '0:0:0:0:0:0:0:1');
+INSERT INTO `hunter_access_record` VALUES ('57', '1001', 'admin', 'login', '2018-06-21 21:20:28', '0:0:0:0:0:0:0:1');
+INSERT INTO `hunter_access_record` VALUES ('58', '1001', 'admin', 'login', '2018-06-21 21:59:42', '0:0:0:0:0:0:0:1');
+INSERT INTO `hunter_access_record` VALUES ('59', '1001', 'admin', 'login', '2018-06-21 22:05:11', '0:0:0:0:0:0:0:1');
+INSERT INTO `hunter_access_record` VALUES ('60', '1001', 'admin', 'login', '2018-06-21 22:14:04', '0:0:0:0:0:0:0:1');
+INSERT INTO `hunter_access_record` VALUES ('61', '1001', 'admin', 'login', '2018-06-21 22:20:01', '0:0:0:0:0:0:0:1');
+INSERT INTO `hunter_access_record` VALUES ('62', '1001', 'admin', 'login', '2018-06-23 10:02:55', '0:0:0:0:0:0:0:1');
+INSERT INTO `hunter_access_record` VALUES ('63', '1001', 'admin', 'login', '2018-06-23 11:15:03', '0:0:0:0:0:0:0:1');
+INSERT INTO `hunter_access_record` VALUES ('64', '1001', 'admin', 'logout', '2018-06-23 11:15:07', '0:0:0:0:0:0:0:1');
+INSERT INTO `hunter_access_record` VALUES ('65', '1001', 'admin', 'login', '2018-06-23 11:21:18', '0:0:0:0:0:0:0:1');
+INSERT INTO `hunter_access_record` VALUES ('66', '1001', 'admin', 'login', '2018-06-23 14:52:11', '0:0:0:0:0:0:0:1');
+INSERT INTO `hunter_access_record` VALUES ('67', '1001', 'admin', 'login', '2018-06-23 14:57:23', '0:0:0:0:0:0:0:1');
+INSERT INTO `hunter_access_record` VALUES ('68', '1001', 'admin', 'login', '2018-06-23 15:14:16', '0:0:0:0:0:0:0:1');
+INSERT INTO `hunter_access_record` VALUES ('69', '1001', 'admin', 'logout', '2018-06-23 16:14:10', '0:0:0:0:0:0:0:1');
+INSERT INTO `hunter_access_record` VALUES ('70', '1001', 'admin', 'login', '2018-06-23 16:44:19', '0:0:0:0:0:0:0:1');
+INSERT INTO `hunter_access_record` VALUES ('71', '1001', 'admin', 'login', '2018-06-23 17:14:29', '0:0:0:0:0:0:0:1');
+INSERT INTO `hunter_access_record` VALUES ('72', '1001', 'admin', 'login', '2018-06-23 17:21:04', '0:0:0:0:0:0:0:1');
+INSERT INTO `hunter_access_record` VALUES ('73', '1001', 'admin', 'login', '2018-06-23 17:32:21', '0:0:0:0:0:0:0:1');
+INSERT INTO `hunter_access_record` VALUES ('74', '1001', 'admin', 'login', '2018-06-23 17:41:43', '0:0:0:0:0:0:0:1');
+INSERT INTO `hunter_access_record` VALUES ('75', '1001', 'admin', 'login', '2018-06-23 17:44:05', '0:0:0:0:0:0:0:1');
+INSERT INTO `hunter_access_record` VALUES ('76', '1001', 'admin', 'login', '2018-06-23 17:49:30', '0:0:0:0:0:0:0:1');
+INSERT INTO `hunter_access_record` VALUES ('77', '1001', 'admin', 'login', '2018-06-23 17:52:19', '0:0:0:0:0:0:0:1');
+INSERT INTO `hunter_access_record` VALUES ('78', '1001', 'admin', 'login', '2018-06-23 17:54:42', '0:0:0:0:0:0:0:1');
+INSERT INTO `hunter_access_record` VALUES ('79', '1001', 'admin', 'login', '2018-06-23 18:22:18', '0:0:0:0:0:0:0:1');
+INSERT INTO `hunter_access_record` VALUES ('80', '1001', 'admin', 'login', '2018-06-23 19:07:53', '0:0:0:0:0:0:0:1');
+INSERT INTO `hunter_access_record` VALUES ('81', '1001', 'admin', 'login', '2018-06-23 19:43:19', '0:0:0:0:0:0:0:1');
+INSERT INTO `hunter_access_record` VALUES ('82', '1001', 'admin', 'login', '2018-06-23 20:03:38', '0:0:0:0:0:0:0:1');
+INSERT INTO `hunter_access_record` VALUES ('83', '1001', 'admin', 'login', '2018-06-23 20:14:27', '0:0:0:0:0:0:0:1');
+INSERT INTO `hunter_access_record` VALUES ('84', '1001', 'admin', 'login', '2018-06-23 20:16:04', '0:0:0:0:0:0:0:1');
+INSERT INTO `hunter_access_record` VALUES ('85', '1001', 'admin', 'logout', '2018-06-23 20:20:50', '0:0:0:0:0:0:0:1');
+INSERT INTO `hunter_access_record` VALUES ('86', '1022', '无名氏1022', 'login', '2018-06-23 20:21:05', '0:0:0:0:0:0:0:1');
+INSERT INTO `hunter_access_record` VALUES ('87', '1022', '无名氏1022', 'logout', '2018-06-23 20:22:41', '0:0:0:0:0:0:0:1');
+INSERT INTO `hunter_access_record` VALUES ('88', '1001', 'admin', 'login', '2018-06-23 20:22:48', '0:0:0:0:0:0:0:1');
+INSERT INTO `hunter_access_record` VALUES ('89', '1001', 'admin', 'login', '2018-06-23 22:07:53', '0:0:0:0:0:0:0:1');
+INSERT INTO `hunter_access_record` VALUES ('90', '1001', 'admin', 'login', '2018-06-23 22:49:44', '0:0:0:0:0:0:0:1');
+INSERT INTO `hunter_access_record` VALUES ('91', '1001', 'admin', 'login', '2018-06-24 08:49:15', '0:0:0:0:0:0:0:1');
+INSERT INTO `hunter_access_record` VALUES ('92', '1001', 'admin', 'login', '2018-06-24 08:52:26', '0:0:0:0:0:0:0:1');
+INSERT INTO `hunter_access_record` VALUES ('93', '1001', 'admin', 'login', '2018-06-24 08:59:02', '0:0:0:0:0:0:0:1');
+INSERT INTO `hunter_access_record` VALUES ('94', '1001', 'admin', 'login', '2018-06-24 09:22:50', '0:0:0:0:0:0:0:1');
+INSERT INTO `hunter_access_record` VALUES ('95', '1001', 'admin', 'login', '2018-06-24 10:10:22', '0:0:0:0:0:0:0:1');
 
 -- ----------------------------
 -- Table structure for hunter_action
@@ -111,35 +203,41 @@ CREATE TABLE `hunter_customer` (
   `CUSTOMER_TEL` varchar(20) NOT NULL,
   `CUSTOMER_EMAIL` varchar(20) NOT NULL,
   `CUSTOMER_ADDRESS` varchar(30) NOT NULL,
+  `CUSTOMER_INDUSTRY` varchar(255) DEFAULT NULL,
+  `CUSTOMER_ENTERPRISESCALE` varchar(255) DEFAULT NULL,
+  `CUSTOMER_COMMUNICATER` varchar(255) DEFAULT NULL,
+  `CUSTOMER_COMMUNICATETIME` varchar(255) DEFAULT NULL,
+  `CUSTOMER_COMMUNICATERESULTS` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`CUSTOMER_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=1217 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1230 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of hunter_customer
 -- ----------------------------
-INSERT INTO `hunter_customer` VALUES ('1214', '醴陵荣旗瓷业有限公司', '陈娟', '17716786888', '23369888@136.com', '中国 湖南 醴陵市 嘉树乡玉茶村柏树组');
-INSERT INTO `hunter_customer` VALUES ('1215', '深圳市松林达电子有限公司', '刘明', '85263335-820', '85264958@126.com', '中国 广东 深圳市宝安区 深圳市宝安区福永社区桥头村桥塘路育');
-INSERT INTO `hunter_customer` VALUES ('1216', '郑州绿之源饮品有限公司 ', '赵志敬', '87094196', '87092165@qq.com', '中国 河南 郑州市 郑州市嘉亿东方大厦609');
+INSERT INTO `hunter_customer` VALUES ('1214', '醴陵荣旗瓷业有限公司', '陈娟', '17716786888', '23369888@136.com', '中国 湖南 醴陵市 嘉树乡玉茶村柏树组', null, null, null, null, null);
+INSERT INTO `hunter_customer` VALUES ('1215', '深圳市松林达电子有限公司', '刘明', '85263335-820', '85264958@126.com', '中国 广东 深圳市宝安区 深圳市宝安区福永社区桥头村桥塘路育', null, null, null, null, null);
+INSERT INTO `hunter_customer` VALUES ('1216', '郑州绿之源饮品有限公司 ', '赵志敬', '87094196', '87092165@qq.com', '中国 河南 郑州市 郑州市嘉亿东方大厦609', null, null, null, null, null);
+INSERT INTO `hunter_customer` VALUES ('1229', '123', '1', '123', '123@qq.com', '123', '123', '123', '123', '123', '123');
 
 -- ----------------------------
 -- Table structure for hunter_goods
 -- ----------------------------
 DROP TABLE IF EXISTS `hunter_goods`;
 CREATE TABLE `hunter_goods` (
-  `GOOD_ID` int(11) NOT NULL AUTO_INCREMENT,
-  `GOOD_NAME` varchar(30) NOT NULL,
-  `GOOD_RYPE` varchar(20) DEFAULT NULL,
-  `GOOD_SIZE` varchar(20) DEFAULT NULL,
-  `GOOD_VALUE` double NOT NULL,
+  `GOOD_ID` int(11) NOT NULL AUTO_INCREMENT COMMENT '职位id',
+  `GOOD_NAME` varchar(30) NOT NULL COMMENT '职位名称',
+  `GOOD_RYPE` varchar(20) NOT NULL COMMENT '学历',
+  `GOOD_SIZE` int(20) NOT NULL COMMENT '招收人数',
+  `GOOD_VALUE` varchar(1000) NOT NULL COMMENT '职位要求',
+  `GOOD_WORK` varchar(10) DEFAULT NULL,
+  `GOOD_CUSTOMERID` int(11) DEFAULT NULL,
   PRIMARY KEY (`GOOD_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=106 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=115 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of hunter_goods
 -- ----------------------------
-INSERT INTO `hunter_goods` VALUES ('103', '五孔插座西门子墙壁开关', '电器', '86*86', '1.85');
-INSERT INTO `hunter_goods` VALUES ('104', '陶瓷马克杯', '陶瓷', '9*9*11', '3.5');
-INSERT INTO `hunter_goods` VALUES ('105', '精酿苹果醋', '饮料', '312ml', '300');
+INSERT INTO `hunter_goods` VALUES ('114', '高级工程师', '博士', '10', '吃苦耐劳', '10年以上', '1215');
 
 -- ----------------------------
 -- Table structure for hunter_operation_record
@@ -153,7 +251,7 @@ CREATE TABLE `hunter_operation_record` (
   `OPERATION_TIME` datetime NOT NULL,
   `OPERATION_RESULT` varchar(15) NOT NULL,
   PRIMARY KEY (`RECORD_ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=79 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of hunter_operation_record
@@ -176,7 +274,6 @@ CREATE TABLE `hunter_record_in` (
   KEY `RECORD_GOODID` (`RECORD_GOODID`),
   KEY `RECORD_REPOSITORYID` (`RECORD_REPOSITORYID`),
   CONSTRAINT `hunter_record_in_ibfk_1` FOREIGN KEY (`RECORD_SUPPLIERID`) REFERENCES `hunter_supplier` (`SUPPLIER_ID`),
-  CONSTRAINT `hunter_record_in_ibfk_2` FOREIGN KEY (`RECORD_GOODID`) REFERENCES `hunter_goods` (`GOOD_ID`),
   CONSTRAINT `hunter_record_in_ibfk_3` FOREIGN KEY (`RECORD_REPOSITORYID`) REFERENCES `hunter_respository` (`REPO_ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
 
@@ -203,7 +300,6 @@ CREATE TABLE `hunter_record_out` (
   KEY `RECORD_GOODID` (`RECORD_GOODID`),
   KEY `RECORD_REPOSITORYID` (`RECORD_REPOSITORYID`),
   CONSTRAINT `hunter_record_out_ibfk_1` FOREIGN KEY (`RECORD_CUSTOMERID`) REFERENCES `hunter_customer` (`CUSTOMER_ID`),
-  CONSTRAINT `hunter_record_out_ibfk_2` FOREIGN KEY (`RECORD_GOODID`) REFERENCES `hunter_goods` (`GOOD_ID`),
   CONSTRAINT `hunter_record_out_ibfk_3` FOREIGN KEY (`RECORD_REPOSITORYID`) REFERENCES `hunter_respository` (`REPO_ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
@@ -222,7 +318,6 @@ CREATE TABLE `hunter_record_storage` (
   `RECORD_NUMBER` int(11) NOT NULL,
   PRIMARY KEY (`RECORD_GOODID`,`RECORD_REPOSITORY`),
   KEY `RECORD_REPOSITORY` (`RECORD_REPOSITORY`),
-  CONSTRAINT `hunter_record_storage_ibfk_1` FOREIGN KEY (`RECORD_GOODID`) REFERENCES `hunter_goods` (`GOOD_ID`),
   CONSTRAINT `hunter_record_storage_ibfk_2` FOREIGN KEY (`RECORD_REPOSITORY`) REFERENCES `hunter_respository` (`REPO_ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=106 DEFAULT CHARSET=utf8;
 
@@ -239,22 +334,24 @@ INSERT INTO `hunter_record_storage` VALUES ('105', '1004', '2000');
 DROP TABLE IF EXISTS `hunter_repo_admin`;
 CREATE TABLE `hunter_repo_admin` (
   `REPO_ADMIN_ID` int(11) NOT NULL AUTO_INCREMENT,
-  `REPO_ADMIN_NAME` varchar(10) NOT NULL,
-  `REPO_ADMIN_SEX` varchar(10) NOT NULL,
-  `REPO_ADMIN_TEL` varchar(20) NOT NULL,
-  `REPO_ADMIN_ADDRESS` varchar(30) NOT NULL,
+  `REPO_ADMIN_NAME` varchar(10) NOT NULL DEFAULT '',
+  `REPO_ADMIN_SEX` varchar(10) NOT NULL DEFAULT '',
+  `REPO_ADMIN_TEL` varchar(20) NOT NULL DEFAULT '',
+  `REPO_ADMIN_ADDRESS` varchar(30) NOT NULL DEFAULT '',
   `REPO_ADMIN_BIRTH` datetime NOT NULL,
   `REPO_ADMIN_REPOID` int(11) DEFAULT NULL,
   PRIMARY KEY (`REPO_ADMIN_ID`),
-  KEY `REPO_ADMIN_REPOID` (`REPO_ADMIN_REPOID`),
-  CONSTRAINT `hunter_repo_admin_ibfk_1` FOREIGN KEY (`REPO_ADMIN_REPOID`) REFERENCES `hunter_respository` (`REPO_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=1020 DEFAULT CHARSET=utf8;
+  KEY `REPO_ADMIN_REPOID` (`REPO_ADMIN_REPOID`)
+) ENGINE=InnoDB AUTO_INCREMENT=1024 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of hunter_repo_admin
 -- ----------------------------
-INSERT INTO `hunter_repo_admin` VALUES ('1018', '王皓', '女', '12345874526', '中国佛山', '2016-12-09 00:00:00', '1004');
-INSERT INTO `hunter_repo_admin` VALUES ('1019', '李富荣', '男', '1234', '广州', '2016-12-07 00:00:00', '1003');
+INSERT INTO `hunter_repo_admin` VALUES ('1019', '', '', '', '', '2016-12-07 00:00:00', '1016');
+INSERT INTO `hunter_repo_admin` VALUES ('1020', '', '', '', '', '2018-06-23 00:00:00', '1015');
+INSERT INTO `hunter_repo_admin` VALUES ('1021', '1231', '男', '123', '123', '1899-12-24 00:00:00', '1018');
+INSERT INTO `hunter_repo_admin` VALUES ('1022', '', '', '', '', '2018-06-23 00:00:00', '1017');
+INSERT INTO `hunter_repo_admin` VALUES ('1023', '', '', '', '', '2018-06-23 00:00:00', null);
 
 -- ----------------------------
 -- Table structure for hunter_respository
@@ -371,20 +468,23 @@ INSERT INTO `hunter_role_action` VALUES ('45', '2');
 DROP TABLE IF EXISTS `hunter_supplier`;
 CREATE TABLE `hunter_supplier` (
   `SUPPLIER_ID` int(11) NOT NULL AUTO_INCREMENT,
-  `SUPPLIER_NAME` varchar(30) NOT NULL,
+  `SEX` varchar(30) NOT NULL,
   `SUPPLIER_PERSON` varchar(10) NOT NULL,
   `SUPPLIER_TEL` varchar(20) NOT NULL,
   `SUPPLIER_EMAIL` varchar(20) NOT NULL,
   `SUPPLIER_ADDRESS` varchar(30) NOT NULL,
   PRIMARY KEY (`SUPPLIER_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=1016 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1021 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of hunter_supplier
 -- ----------------------------
-INSERT INTO `hunter_supplier` VALUES ('1013', '浙江奇同电器有限公司', '王泽伟', '13777771126', '86827868@126.com', '中国 浙江 温州市龙湾区 龙湾区永强大道1648号');
-INSERT INTO `hunter_supplier` VALUES ('1014', '醴陵春天陶瓷实业有限公司', '温仙容', '13974167256', '23267999@126.com', '中国 湖南 醴陵市 东正街15号');
-INSERT INTO `hunter_supplier` VALUES ('1015', '洛阳嘉吉利饮品有限公司', '郑绮云', '26391678', '22390898@qq.com', '中国 广东 佛山市顺德区 北滘镇怡和路2号怡和中心14楼');
+INSERT INTO `hunter_supplier` VALUES ('1015', '男', '郑绮云', '26391678', '22390898@qq.com', '中国 广东 佛山市顺德区 北滘镇怡和路2号怡和中心14楼');
+INSERT INTO `hunter_supplier` VALUES ('1016', '男', '邹宏林', '15803047723', '123@qqc.om', '23');
+INSERT INTO `hunter_supplier` VALUES ('1017', '男', '黄凤霞', '123', '123@qq.com', '123');
+INSERT INTO `hunter_supplier` VALUES ('1018', '女', '33', '33', '33@qq.com', '123');
+INSERT INTO `hunter_supplier` VALUES ('1019', '男', '77', '77', '77@qq.com', '77');
+INSERT INTO `hunter_supplier` VALUES ('1020', '男', '88', '88', '88@qq.com', '88');
 
 -- ----------------------------
 -- Table structure for hunter_user
@@ -392,18 +492,21 @@ INSERT INTO `hunter_supplier` VALUES ('1015', '洛阳嘉吉利饮品有限公司
 DROP TABLE IF EXISTS `hunter_user`;
 CREATE TABLE `hunter_user` (
   `USER_ID` int(11) NOT NULL AUTO_INCREMENT,
-  `USER_USERNAME` varchar(30) NOT NULL,
+  `USER_USERNAME` varchar(30) NOT NULL DEFAULT '无名氏',
   `USER_PASSWORD` varchar(40) NOT NULL,
   `USER_FIRST_LOGIN` int(11) NOT NULL,
   PRIMARY KEY (`USER_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=1020 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1024 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of hunter_user
 -- ----------------------------
 INSERT INTO `hunter_user` VALUES ('1001', 'admin', '6f5379e73c1a9eac6163ab8eaec7e41c', '0');
-INSERT INTO `hunter_user` VALUES ('1018', '王皓', '50f202f4862360e55635b0a9616ded13', '1');
 INSERT INTO `hunter_user` VALUES ('1019', '李富荣', 'c4b3af5a5ab3e3d5aac4c5a5436201b8', '1');
+INSERT INTO `hunter_user` VALUES ('1020', '邹宏林', '38dc12ed0ca4f15ef59db04c6479b5ce', '1');
+INSERT INTO `hunter_user` VALUES ('1021', '1231', '19c6797d19c8ee2d308e65106b01aa5b', '1');
+INSERT INTO `hunter_user` VALUES ('1022', '无名氏1022', '9d149ac891b6e304d2ca3b051e52dc16', '0');
+INSERT INTO `hunter_user` VALUES ('1023', '无名氏1023', 'ea83c15f309f59560994d8b98d70515c', '1');
 
 -- ----------------------------
 -- Table structure for hunter_user_role
@@ -422,5 +525,24 @@ CREATE TABLE `hunter_user_role` (
 -- Records of hunter_user_role
 -- ----------------------------
 INSERT INTO `hunter_user_role` VALUES ('1', '1001');
-INSERT INTO `hunter_user_role` VALUES ('2', '1018');
 INSERT INTO `hunter_user_role` VALUES ('2', '1019');
+INSERT INTO `hunter_user_role` VALUES ('2', '1020');
+INSERT INTO `hunter_user_role` VALUES ('2', '1021');
+INSERT INTO `hunter_user_role` VALUES ('2', '1022');
+INSERT INTO `hunter_user_role` VALUES ('2', '1023');
+
+-- ----------------------------
+-- Table structure for hunter_user_supplier
+-- ----------------------------
+DROP TABLE IF EXISTS `hunter_user_supplier`;
+CREATE TABLE `hunter_user_supplier` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `USER_ID` int(11) DEFAULT NULL,
+  `SUPPLIER_ID` int(11) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of hunter_user_supplier
+-- ----------------------------
+INSERT INTO `hunter_user_supplier` VALUES ('1', '1001', '1016');

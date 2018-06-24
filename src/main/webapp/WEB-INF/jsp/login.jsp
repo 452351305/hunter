@@ -9,6 +9,8 @@
 	href="${pageContext.request.contextPath}/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/css/model/login/login.css">
+<link rel="icon" href="${pageContext.request.contextPath}/pagecomponent/images/favicon.ico" mce_href="${pageContext.request.contextPath}/pagecomponent/images/favicon.ico" type="image/x-icon">  
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/pagecomponent/images/favicon.ico" mce_href="${pageContext.request.contextPath}/pagecomponent/images/favicon.ico" type="image/x-icon"> 
 </head>
 <body>
 	<!-- 定义容器 -->
